@@ -14,10 +14,10 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Post.associate = function(models) {
+  Tags.associate = function(models) {
     // We're saying that a Tag should belong to an Journal
     // A Tag can't be created without an Journal due to the foreign key constraint
-    Post.belongsTo(models.Journal, {
+    Tags.belongsTo(models.Journal, {
       foreignKey: {
         allowNull: false
       }
