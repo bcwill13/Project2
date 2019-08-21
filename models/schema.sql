@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS journal_db;
-CREATE DATABASE journal_db;
+DROP DATABASE IF EXISTS dreamjournal_db;
+CREATE DATABASE dreamjournal_db;
 
