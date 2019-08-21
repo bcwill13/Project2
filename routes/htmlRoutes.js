@@ -26,29 +26,30 @@ module.exports = function(app) {
   //   db.Journal.findAll({ where: {} });
   // });
 
-  // router.get("/journals/", function (req, res) {
-  //     // Get all orders
-  //     db.Journal.findAll({
-  //       // Make sure to include the products
-  //       include: [
-  //         {
-  //           model: Tags,
-  //           as: "tags",
-  //           required: false,
-  //           // Pass in the journal attributes that you want to retrieve
-  //           attributes: ["id", "name", "description"],
-  //           through: {
-  //             // This block of code allows you to retrieve the properties of the join table
-  //             model: JournalTags,
-  //             as: "JournalTags"
-  //           }
+  // api.get("/journals/", function(req, res) {
+  //   // Get all journal entries
+  //   db.Journal.findAll({
+  //     // Make sure to include the products
+  //     include: [
+  //       {
+  //         model: Tags,
+  //         as: "tags",
+  //         required: false,
+  //         // Pass in the TAG attributes that you want to retrieve
+  //         attributes: ["id", "name"],
+  //         through: {
+  //           // This block of code allows you to retrieve the properties of the join table
+  //           model: JournalTags,
+  //           as: "JournalTags"
   //         }
-  //       ]
-  //     });
-  //     // If everything goes well respond with the journals
-  //     return respondWith(res, 200, ["Returning all journals"], { allJournals });
-  //   })
-  // );
+  //       }
+  //     ]
+  //   });
+  //   // If everything goes well respond with the journals
+  //   res.render("allEntries", {
+
+  //   });
+  // });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
