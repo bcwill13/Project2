@@ -1,0 +1,26 @@
+comments are not permitted in json files so I've deleted the lines we don't need instead.
+
+the following is a copy of the original config.json after editing to comment the lines we don't need yet.
+
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "dreamjournal_db",
+    "host": "localhost",
+    "dialect": "mysql"
+    //// these are disabled until we need them
+    //},
+    // "test": {
+    //   "username": "root",
+    //   "password": null,
+    //   "database": "testdb",
+    //   "host": "localhost",
+    //   "dialect": "mysql",
+    //   "logging": false
+    // },
+    // "production": {
+    //   "use_env_variable": "JAWSDB_URL",
+    //   "dialect": "mysql"
+  }
+}
