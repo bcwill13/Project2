@@ -1,13 +1,18 @@
 module.exports = function(sequelize, DataTypes) {
   var Journal = sequelize.define("Journal", {
-    description: DataTypes.TEXT
+    description: {
+      allowNull: false,
+      type: DataTypes.TEXT,
+      validate: {
+        notEmpty: true
+      }
+    }
   });
-
-  Journal.associate = (models) => {
+  Journal.associate = function(models) {
     Journal.belongsToMany(models.Tags, {
-      through: 'JournalTags',
-      as : 'tags',
-      foreignKey: 'JournalId'
+      through: "JournalTags",
+      as: "tags",
+      foreignKey: "journalId"
     });
   };
   return Journal;
