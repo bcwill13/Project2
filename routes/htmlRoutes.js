@@ -22,33 +22,61 @@ module.exports = function(app) {
     });
   });
 
-  // app.get("/journal/:tag", function(req, res) {
-  //   db.Journal.findAll({ where: {} });
-  // });
+  // retrieve all journals with tags tagging along
+  // UNTESTED
+  app.get("/journals/", function(req, res) {
+    // Get all journal entries
+    db.JournalEntry.findAll({
+      // Make sure to include the tags
+      include: [
+        {
+          model: Tags,
+          as: "tags",
+          required: false,
+          // Pass in the TAG attributes that you want to retrieve
+          attributes: ["id", "name"],
+          through: {
+            // This block of code allows you to retrieve the properties of the join table
+            model: JournalTags,
+            as: "JournalTags"
+          }
+        }
+      ]
+    }).then(function(dbJournal) {
+      // If everything goes well respond with the journals
+      res.render("journal", {
+        journals: dbJournal
+      });
+    });
+  });
 
-  // router.get("/journals/", function (req, res) {
-  //     // Get all orders
-  //     db.Journal.findAll({
-  //       // Make sure to include the products
-  //       include: [
-  //         {
-  //           model: Tags,
-  //           as: "tags",
-  //           required: false,
-  //           // Pass in the journal attributes that you want to retrieve
-  //           attributes: ["id", "name", "description"],
-  //           through: {
-  //             // This block of code allows you to retrieve the properties of the join table
-  //             model: JournalTags,
-  //             as: "JournalTags"
-  //           }
-  //         }
-  //       ]
-  //     });
-  //     // If everything goes well respond with the journals
-  //     return respondWith(res, 200, ["Returning all journals"], { allJournals });
-  //   })
-  // );
+  // retrieve all tags with journals tagging along
+  // UNTESTED
+  app.get("/tags/", function(req, res) {
+    // Get all tag entries
+    db.Tag.findAll({
+      // Make sure to include the Journals
+      include: [
+        {
+          model: Journals,
+          as: "journals",
+          required: false,
+          // Pass in the journal attributes that you want to retrieve
+          attributes: ["id", "description"],
+          through: {
+            // This block of code allows you to retrieve the properties of the join table
+            model: JournalTags,
+            as: "JournalTags"
+          }
+        }
+      ]
+    }).then(function(dbTag) {
+      // If everything goes well respond with the journals
+      res.render("tag", {
+        tags: dbTag
+      });
+    });
+  });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {

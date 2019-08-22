@@ -1,46 +1,47 @@
 // Get references to page elements
-var $entryText = $("#entry-text");
+var $journalText = $("#journal-text");
+var $journalDescription = $("#journal-description");
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $journalList = $("#journal-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveJournal: function(journal) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/journals",
+      data: JSON.stringify(journal)
     });
   },
-  getExamples: function() {
+  getJournals: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/journals",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteJournal: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/journals/" + id,
       type: "DELETE"
     });
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+// refreshJournals gets new journals from the db and repopulates the list
+var refreshJournals = function() {
+  API.getJournals().then(function(data) {
+    var $journals = data.map(function(journal) {
       var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .text(journal.text)
+        .attr("href", "/journal/" + journal.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
-          "data-id": example.id
+          "data-id": journal.id
         })
         .append($a);
 
@@ -53,46 +54,46 @@ var refreshExamples = function() {
       return $li;
     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    $journalList.empty();
+    $journalList.append($journals);
   });
 };
 
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
+// handleFormSubmit is called whenever we submit a new journal
+// Save the new journal to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+  var journal = {
+    text: $journalText.val().trim(),
+    description: $journalDescription.val().trim()
   };
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
+  if (!(journal.text && journal.description)) {
+    alert("You must enter an journal text and description!");
     return;
   }
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
+  API.saveJournal(journal).then(function() {
+    refreshJournals();
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+  $journalText.val("");
+  $journalDescription.val("");
 };
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
+// handleDeleteBtnClick is called when an journal's delete button is clicked
+// Remove the journal from the db and refresh the list
 var handleDeleteBtnClick = function() {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+  API.deleteJournal(idToDelete).then(function() {
+    refreshJournals();
   });
 };
 
 // Add event listeners to the submit and delete buttons ...and make them nice
 $submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$journalList.on("click", ".delete", handleDeleteBtnClick);
