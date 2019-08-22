@@ -66,7 +66,7 @@ module.exports = function(app) {
     });
   });
 
-   /**
+  /**
    *  APIs for jurnals journal && tags
    */
   // GET /api/journals/:journalId/tags
@@ -112,7 +112,7 @@ module.exports = function(app) {
     });
   });
 
-   /**
+  /**
    *  APIs for tags
    */
 
@@ -150,12 +150,14 @@ module.exports = function(app) {
   // Delete an example by id
   app.delete("/api/tags/:tagId", function(req, res) {
     var tagId = req.params.tagId;
-    db.tags.destroy({
-      where: {
-        id: tagId
-      }
-    }).then(function(tag) {
-      res.json(tag);
-    });
+    db.tags
+      .destroy({
+        where: {
+          id: tagId
+        }
+      })
+      .then(function(tag) {
+        res.json(tag);
+      });
   });
 };
