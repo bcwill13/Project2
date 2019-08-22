@@ -26,7 +26,7 @@ module.exports = function(app) {
   // UNTESTED
   app.get("/journals/", function(req, res) {
     // Get all journal entries
-    db.Journal.findAll({
+    db.JournalEntry.findAll({
       // Make sure to include the tags
       include: [
         {
@@ -45,7 +45,7 @@ module.exports = function(app) {
     }).then(function(dbJournal) {
       // If everything goes well respond with the journals
       res.render("journal", {
-        journal: dbJournal
+        journals: dbJournal
       });
     });
   });
@@ -73,7 +73,7 @@ module.exports = function(app) {
     }).then(function(dbTag) {
       // If everything goes well respond with the journals
       res.render("tag", {
-        tag: dbTag
+        tags: dbTag
       });
     });
   });
