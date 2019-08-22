@@ -1,21 +1,22 @@
 module.exports = function(sequelize, DataTypes) {
-  var Tags = sequelize.define("Tags", {
+  var Tag = sequelize.define("Tag", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         len: [1]
       }
     }
   });
-  Tags.associate = function(models) {
+  Tag.associate = function(models) {
     // We're saying that a Tag should belong to an Journal
     // A Tag can't be created without an Journal due to the foreign key constraint
-    Tags.belongsToMany(models.Journal, {
-      through: "JournalTags",
-      as: "journal",
+    Tag.belongsToMany(models.Journal, {
+      through: "JournalTag",
+      as: "journals",
       foreignKey: "tagId"
     });
   };
-  return Tags;
+  return Tag;
 };
