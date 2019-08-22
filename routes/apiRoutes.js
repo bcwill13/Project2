@@ -8,10 +8,22 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/journals", function(req, res) {
+    db.Journal.findAll({}).then(function(dbJournals) {
+      res.json(dbJournals);
+    });
+  });
+
   // Create a new example
   app.post("/api/examples", function(req, res) {
     db.Example.create(req.body).then(function(dbExample) {
       res.json(dbExample);
+    });
+  });
+
+  app.post("/api/journals", function(req, res) {
+    db.Journal.create(req.body).then(function(dbJournal) {
+      res.json(dbJournal);
     });
   });
 
