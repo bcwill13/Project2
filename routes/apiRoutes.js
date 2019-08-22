@@ -8,11 +8,11 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/journals", function(req, res) {
-    db.Journal.findAll({}).then(function(dbJournals) {
-      res.json(dbJournals);
-    });
-  });
+  // app.get("/api/journals", function(req, res) {
+  //   db.Journal.findAll({}).then(function(dbJournals) {
+  //     res.json(dbJournals);
+  //   });
+  // });
 
   // Create a new example
   app.post("/api/examples", function(req, res) {
@@ -21,11 +21,11 @@ module.exports = function(app) {
     });
   });
 
-  app.post("/api/journals", function(req, res) {
-    db.Journal.create(req.body).then(function(dbJournal) {
-      res.json(dbJournal);
-    });
-  });
+  // app.post("/api/journals", function(req, res) {
+  //   db.Journal.create(req.body).then(function(dbJournal) {
+  //     res.json(dbJournal);
+  //   });
+  // });
 
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
