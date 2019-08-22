@@ -1,6 +1,5 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var $entryText = $("#entry-text");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
