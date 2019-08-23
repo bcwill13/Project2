@@ -13,9 +13,7 @@ module.exports = function(app) {
 
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
+    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
       res.render("example", {
         example: dbExample
       });
@@ -26,11 +24,11 @@ module.exports = function(app) {
   // UNTESTED
   app.get("/journals/", function(req, res) {
     // Get all journal entries
-    db.JournalEntry.findAll({
+    db.Journal.findAll({
       // Make sure to include the tags
       include: [
         {
-          model: Tags,
+          model: Tag,
           as: "tags",
           required: false,
           // Pass in the TAG attributes that you want to retrieve
@@ -54,7 +52,7 @@ module.exports = function(app) {
   // UNTESTED
   app.get("/tags/", function(req, res) {
     // Get all tag entries
-    db.Tag.findAll({
+    db.Tags.findAll({
       // Make sure to include the Journals
       include: [
         {
