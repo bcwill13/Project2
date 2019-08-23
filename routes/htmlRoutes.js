@@ -52,7 +52,7 @@ module.exports = function(app) {
   // UNTESTED
   app.get("/tags/", function(req, res) {
     // Get all tag entries
-    db.Tags.findAll({
+    db.Tag.findAll({
       // Make sure to include the Journals
       include: [
         {
