@@ -1,21 +1,45 @@
 <div id="home">
   <div class="container">
     <div class="row">
-      <div class="col s8 offset-2">
+      <div class="col s10 offset-2">
         <h1>{{msg}}</h1>
         <h2>Dream Journal</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="journal-text">Title</label>
-            <input type="text" id="journal-text" class="form-control" aria-describedby="journal-text"
-              placeholder="Enter Dream Title (optional)" />
-          </div>
-          <div class="input-field col s6">
-            <label for="entry-description">Entry Description</label>
-            <textarea class="materialize-textarea" id="entry-description" placeholder="Enter Entry Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
+        <div class="section">
+          <form class="clearfix mb-4" action="POST">
+            <div class="form-group">
+              <label for="journal-title">Title</label>
+              <input type="text" id="journal-title" class="form-control" aria-describedby="journal-title"
+                placeholder="Enter Dream Title (optional)" />
+              <div class="input-field col s12">
+                <label for="journal-description">Dream Description</label>
+                <textarea class="materialize-textarea" id="journal-description" placeholder="Enter Dream Description"></textarea>
+              </div>
+
+<div class="row">
+        <div class="col s6">
+            <input type="text"  id="lg-input" placeholder="Add a keyword here">
+        </div>
+        div class="col s4">
+            <a id="cmd-ChipsAjout" class="waves-effect waves-circle btn"><i class="material-icons">add</i></a>
+        </div>
+    </div>
+    <!--CHIPS/TAGS ZONE (ON FOCUS ONE IS REDIRECTED TO IMPUT WITH AUTOCOMPLETE)-->
+    <div id="lg-Chips"></div>
+
+              
+              <div class="input-field col s6">
+                <label for="tag-name">tag name</label>
+                <textarea class="materialize-textarea" id="journal-description" placeholder="Enter Dream Description"></textarea>
+              </div>
+
+              <button id="submit" class="btn btn-primary float-right">Submit</button>
+            </div>
+          </form>
+        </div>
+
+
+        <br><br>  <!-- temp -->
+
         <h3>Journal Entries:</h3>
         <ul id="journal-list" class="list-group">
           {{#each examples}}
