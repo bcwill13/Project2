@@ -29,9 +29,7 @@ module.exports = function(app) {
 
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
+    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
       res.json(dbExample);
     });
   });
@@ -135,7 +133,7 @@ module.exports = function(app) {
 
   // Get all examples
   app.get("/api/tags", function(req, res) {
-    db.tag.findAll({}).then(function(tags) {
+    db.Tag.findAll({}).then(function(tags) {
       res.json(tags);
     });
   });

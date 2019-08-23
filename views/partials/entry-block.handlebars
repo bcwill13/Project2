@@ -2,11 +2,11 @@
     {{name}}
 
     {{#each tags}}
-    <button class="tag" data-id="{{id}}">
+    <button class="tag" data-id="{{id}}"> {{this.type}}
 
     </button>
     {{/each}}
 
-
+    <button class="edit-entry" data-id="{{this.id}}">EDIT ENTRY</button>
     <button class="delete-entry" data-id="{{this.id}}">DELETE ENTRY</button>
 </li>
