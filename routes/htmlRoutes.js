@@ -28,7 +28,7 @@ module.exports = function(app) {
       // Make sure to include the tags
       include: [
         {
-          model: Tag,
+          model: Tags,
           as: "tags",
           required: false,
           // Pass in the TAG attributes that you want to retrieve
