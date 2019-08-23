@@ -3,6 +3,8 @@ node_modules
 npm-debug.log
 .env
 
+config/config.json
+
 ignore/
 
 ## Ignore Visual Studio temporary files, build results, and
