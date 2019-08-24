@@ -12,7 +12,6 @@ module.exports = function(app) {
   });
 
   // retrieve all journals with tags tagging along
-  // Sorta TESTED
   app.get("/journals/", function(req, res) {
     // Get all journal entries
     db.Journal.findAll({
@@ -33,7 +32,7 @@ module.exports = function(app) {
       ]
     }).then(function(dbJournal) {
       // If everything goes well respond with the journals
-      res.render("journalentry", {
+      res.render("allEntries", {
         journals: dbJournal
       });
     });
@@ -48,20 +47,20 @@ module.exports = function(app) {
       include: [
         {
           model: db.Journal,
-          as: "journals",
+          as: "journal",
           required: false,
           // Pass in the journal attributes that you want to retrieve
           attributes: ["id", "description"],
           through: {
             // This block of code allows you to retrieve the properties of the join table
-            model: db.JournalTags,
-            as: "JournalTags"
+            model: db.JournalTag,
+            as: "JournalTag"
           }
         }
       ]
     }).then(function(dbTag) {
-      // If everything goes well respond with the journals
-      res.render("tag", {
+      // If everything goes well respond with the tags
+      res.render("allTags", {
         tags: dbTag
       });
     });
