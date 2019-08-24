@@ -135,7 +135,7 @@ module.exports = function(app) {
 
   // Get all examples
   app.get("/api/tags", function(req, res) {
-    db.tag.findAll({}).then(function(tags) {
+    db.Tag.findAll({}).then(function(tags) {
       res.json(tags);
     });
   });
