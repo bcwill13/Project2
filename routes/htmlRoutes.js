@@ -35,7 +35,6 @@ module.exports = function(app) {
       // If everything goes well respond with the journals
 
       res.render("allEntries", {
-
         journals: dbJournal
       });
     });
