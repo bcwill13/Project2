@@ -13,8 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     // We're saying that a Tag should belong to an Journal
     // A Tag can't be created without an Journal due to the foreign key constraint
     Tag.belongsToMany(models.Journal, {
-      through: "JournalTags",
-      as: "journals",
+      through: "JournalTag",
+      as: "journal",
       foreignKey: "tagId"
     });
   };
