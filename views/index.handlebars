@@ -1,3 +1,5 @@
+<body id="body" class="dark-mode">
+  <button type="button" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode">🌛</button>
 <div id="home">
   <div class="container">
     <div class="row">
@@ -10,30 +12,25 @@
             <input type="text" id="journal-title" class="form-control" aria-describedby="journal-title"
               placeholder="Enter Dream Title (optional)" />
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <label for="journal-description">Dream Description</label>
-            <textarea class="materialize-textarea" id="journal-description" placeholder="Enter Dream Description"></textarea>
+            <textarea class="form-control" id="journal-description" placeholder="Enter Dream Description"></textarea>
           </div>
           <div class="form-group">
             <label for="tags">Tags</label>
             <textarea class="form-control" id="tags" aria-describedby="tags" placeholder="Enter Tag"></textarea>
             <a class="waves-effect waves-light btn"><i class="material-icons left"></i></a>
           </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Journal Entries:</h3>
-        <ul id="journal-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="jounral/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+<script type="text/javascript">
+  function toggleDarkLight() {
+    var body = document.getElementById("body");
+    var currentClass = body.className;
+    body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
+  }
+</script>
