@@ -1,32 +1,25 @@
 <div id="home">
   <div class="container">
     <div class="row">
-      <div class="col s10 offset-2">
+      <div class="col s8 offset-2">
         <h1>{{msg}}</h1>
         <h2>Dream Journal</h2>
-        <div class="section">
-          <form class="clearfix mb-4" action="POST">
-            <div class="form-group">
-              <label for="journal-title">Title</label>
-              <input type="text" id="journal-title" class="form-control" aria-describedby="journal-title"
-                placeholder="Enter Dream Title (optional)" />
-              <div class="input-field col s12">
-                <label for="journal-description">Dream Description</label>
-                <textarea class="materialize-textarea" id="journal-description" placeholder="Enter Dream Description"></textarea>
-              </div>              
-              <div class="input-field col s6">
-                <label for="tag-name">tag name</label>
-                <textarea class="materialize-textarea" id="journal-description" placeholder="Enter Dream Description"></textarea>
-              </div>
-
-              <button id="submit" class="btn btn-primary float-right">Submit</button>
-            </div>
-          </form>
-        </div>
-
-
-        <br><br>  <!-- temp -->
-
+        <form class="clearfix mb-4" action="POST">
+          <div class="form-group">
+            <label for="journal-title">Title</label>
+            <input type="text" id="journal-title" class="form-control" aria-describedby="journal-title"
+              placeholder="Enter Dream Title (optional)" />
+          </div>
+          <div class="input-field col s6">
+            <label for="journal-description">Dream Description</label>
+            <textarea class="materialize-textarea" id="journal-description" placeholder="Enter Dream Description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="tags">Tags</label>
+            <textarea class="form-control" id="tags" aria-describedby="tags" placeholder="Enter Tag"></textarea>
+          </div>
+          <button id="submit" class="btn btn-primary float-right">Submit</button>
+        </form>
         <h3>Journal Entries:</h3>
         <ul id="journal-list" class="list-group">
           {{#each examples}}
