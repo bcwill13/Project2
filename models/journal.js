@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Journal = sequelize.define("Journals", {
+  var Journal = sequelize.define("Journal", {
     title: {
       allowNull: true,
       type: DataTypes.TEXT
@@ -13,9 +13,9 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   Journal.associate = function(models) {
-    Journal.belongsToMany(models.Tags, {
-      through: "JournalTags",
-      as: "tags",
+    Journal.belongsToMany(models.Tag, {
+      through: "JournalTag",
+      as: "tag",
       foreignKey: "journalId"
     });
   };

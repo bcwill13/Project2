@@ -3,10 +3,10 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Journal.findAll({}).then(function(dbExamples) {
+    db.Journal.findAll({}).then(function(dbJournals) {
       res.render("index", {
         msg: "Welcome!",
-        examples: dbExamples
+        journals: dbJournals
       });
     });
   });
@@ -20,14 +20,14 @@ module.exports = function(app) {
       include: [
         {
           model: db.Tag,
-          as: "tags",
+          as: "tag",
           required: false,
           // Pass in the TAG attributes that you want to retrieve
           attributes: ["id", "name"],
           through: {
             // This block of code allows you to retrieve the properties of the join table
-            model: db.JournalTags,
-            as: "JournalTags"
+            model: db.JournalTag,
+            as: "JournalTag"
           }
         }
       ]
