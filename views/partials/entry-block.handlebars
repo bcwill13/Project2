@@ -1,12 +1,12 @@
 <li>
-    {{name}}
+    {{description}}
 
     {{#each tags}}
-    <button class="tag" data-id="{{id}}"> {{this.type}}
+    <button class="tag btn-small" data-id="{{id}}"> {{this.name}}
 
     </button>
     {{/each}}
 
-    <button class="edit-entry" data-id="{{this.id}}">EDIT ENTRY</button>
-    <button class="delete-entry" data-id="{{this.id}}">DELETE ENTRY</button>
+    <button class="edit-entry btn-small" data-id="{{this.id}}">EDIT/UPDATE</button>
+    <button class="delete-entry btn-small" data-id="{{this.id}}"><i class="material-icons">cancel</i></button>
 </li>

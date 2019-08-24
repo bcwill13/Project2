@@ -33,7 +33,8 @@ module.exports = function(app) {
       ]
     }).then(function(dbJournal) {
       // If everything goes well respond with the journals
-      res.render("journalentry", {
+
+      res.render("allEntries", {
         journals: dbJournal
       });
     });
