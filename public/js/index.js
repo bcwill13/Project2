@@ -1,5 +1,5 @@
 // Get references to page elements
-var $journalText = $("#journal-text");
+var $journalTitle = $("#journal-title");
 var $journalDescription = $("#journal-description");
 var $submitBtn = $("#submit");
 var $journalList = $("#journal-list");
@@ -35,7 +35,7 @@ var refreshJournals = function() {
   API.getJournals().then(function(data) {
     var $journals = data.map(function(journal) {
       var $a = $("<a>")
-        .text(journal.text)
+        .text(journal.title)
         .attr("href", "/journal/" + journal.id);
 
       var $li = $("<li>")
@@ -65,12 +65,16 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var journal = {
-    text: $journalText.val().trim(),
+    title: $journalTitle.val().trim(),
     description: $journalDescription.val().trim()
   };
 
-  if (!(journal.text && journal.description)) {
-    alert("You must enter an journal text and description!");
+  // if (!(journal.title && journal.description)) {
+  //   alert("You must enter an journal title and description!");
+  //   return;
+  // }
+  if (!journal.description) {
+    alert("You must enter a dream description");
     return;
   }
 
@@ -78,7 +82,7 @@ var handleFormSubmit = function(event) {
     refreshJournals();
   });
 
-  $journalText.val("");
+  $journalTitle.val("");
   $journalDescription.val("");
 };
 
