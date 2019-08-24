@@ -30,21 +30,21 @@ module.exports = function(app) {
       // Make sure to include the tags
       include: [
         {
-          model: Tag,
+          model: db.Tag,
           as: "tags",
           required: false,
           // Pass in the TAG attributes that you want to retrieve
           attributes: ["id", "name"],
           through: {
             // This block of code allows you to retrieve the properties of the join table
-            model: JournalTags,
+            model: db.JournalTags,
             as: "JournalTags"
           }
         }
       ]
     }).then(function(dbJournal) {
       // If everything goes well respond with the journals
-      res.render("journal", {
+      res.render("allEntries", {
         journals: dbJournal
       });
     });
@@ -58,7 +58,7 @@ module.exports = function(app) {
       // Make sure to include the Journals
       include: [
         {
-          model: Journals,
+          model: db.Journals,
           as: "journals",
           required: false,
           // Pass in the journal attributes that you want to retrieve
