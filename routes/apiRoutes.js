@@ -124,7 +124,7 @@ module.exports = function(app) {
 
   // Get a specific journal
   app.get("/api/journals/:journalId/tags/:tagId", function(req, res) {
-    var journalId = req.params.journalId;
+    //var journalId = req.params.journalId;
     var tagId = req.params.tagId;
     db.Journal.findAll({
       where: {
@@ -234,7 +234,11 @@ module.exports = function(app) {
   });
 
   // protected route
-  app.get("/protected", passport.authenticate("jwt", { session: true }), function(req, res) {
-    res.json("Success! You can now see this without a token.");
-  });
+  app.get(
+    "/protected",
+    passport.authenticate("jwt", { session: true }),
+    function(req, res) {
+      res.json("Success! You can now see this without a token.");
+    }
+  );
 };
