@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
     // A Tag can't be created without an Journal due to the foreign key constraint
     Tag.belongsToMany(models.Journal, {
       through: "JournalTag",
-      as: "journals",
+      as: "journal",
       foreignKey: "tagId"
     });
   };
