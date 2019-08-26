@@ -45,34 +45,3 @@
     </div>
   </div>
 </body>
-
-<script type="text/javascript">
-  function toggleDarkLight() {
-    var body = document.getElementById("body");
-    var currentClass = body.className;
-    body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
-  }
-
-
-  var tagList = [];
-
-  $('.chips').chips();
-
-  $("#addChipBtn").click(function () {
-    var tag = {
-      tag: $(".tags").val().trim()
-    }
-    tagList.push(tag);
-    var newChip = $("<div>").addClass("chip");
-    newChip.text($(".tags").val().trim());
-    var deleteBtn = $("<i>").addClass("close material-icons").text("close");
-    newChip.append(deleteBtn);
-    $("#lg-Chips").append(newChip);
-    $(".tags").val("");
-  })
-
-
-
-
-
-</script>

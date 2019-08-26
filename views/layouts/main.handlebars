@@ -26,6 +26,42 @@
 
 </body>
 
+<script type="text/javascript">
+  function toggleDarkLight() {
+    var body = document.getElementById("body");
+    var currentClass = body.className;
+    body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
+  }
 
+
+  var tagList = [];
+
+  $('.chips').chips();
+
+  $("#addChipBtn").click(function () {
+    var tag = {
+      tag: $(".tags").val().trim()
+    }
+    tagList.push(tag);
+    var newChip = $("<div>").addClass("chip");
+    newChip.text($(".tags").val().trim());
+    var deleteBtn = $("<i>").addClass("close material-icons").text("close");
+    newChip.append(deleteBtn);
+    $("#lg-Chips").append(newChip);
+    $(".tags").val("");
+    console.log(tagList);
+  })
+
+// DELETE FUNCTION NOT WORKING
+  //$('#lg-Chips').on("chip.delete", function () {
+  //  for (i = 0; i < tagList.length; i++) {
+  //    if (tagList[i] === this.val()) {
+  //      tagList.splice(i, 1);
+  //    }
+  //  }
+  //  console.log(tagList);
+  //});
+
+</script>
 
 </html>
