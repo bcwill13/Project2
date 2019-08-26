@@ -39,7 +39,6 @@ module.exports = function(app) {
   });
 
   // retrieve all tags with journals tagging along
-  // UNTESTED
   app.get("/tags/", function(req, res) {
     // Get all tag entries
     db.Tag.findAll({
