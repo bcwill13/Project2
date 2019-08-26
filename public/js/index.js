@@ -1,8 +1,6 @@
 // Get references to page elements
 var $journalTitle = $("#journal-title");
 var $journalDescription = $("#journal-description");
-var $tags = $("#tags");
-
 var $submitBtn = $("#submit");
 var $journalList = $("#journal-list");
 
@@ -71,7 +69,8 @@ var handleFormSubmit = function(event) {
   //   description: $journalDescription.val().trim(),
   //   tags: ["Hey", "I am", "an Initial Tag"]
   // };
-  var journal = { // debugging/temp
+  var journal = {
+    // debugging/temp
     title: "journalTitle",
     description: "journalDescription",
     tags: ["Hey", "I am", "an Initial Tag"]
