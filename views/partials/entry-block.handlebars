@@ -1,12 +1,18 @@
 <li>
-    {{name}}
-
-    {{#each tags}}
-    <button class="tag" data-id="{{id}}"> {{this.type}}
-
-    </button>
-    {{/each}}
-
-    <button class="edit-entry" data-id="{{this.id}}">EDIT ENTRY</button>
-    <button class="delete-entry" data-id="{{this.id}}">DELETE ENTRY</button>
+    <div class="row">
+        <div class="col s8 entryDescription">
+            {{description}}
+        </div>
+        <div class="col s2">
+            <button class="edit-entry btn-small" data-id="{{this.id}}">EDIT/UPDATE</button>
+            <button class="delete-entry btn-small" data-id="{{this.id}}"><i class="material-icons">cancel</i></button>
+        </div>
+    </div>
+    <div class="row">
+        {{#each tags}}
+        <div class="chip tag" data-id="{{id}}"> {{this.name}}
+            <i class="close material-icons">close</i>
+        </div>
+        {{/each}}
+    </div>
 </li>
