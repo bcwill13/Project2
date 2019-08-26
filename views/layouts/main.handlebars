@@ -6,25 +6,62 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 
   <!-- Materialize Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <link rel="stylesheet" href="/styles/styles.css" media="screen" charset="utf-8">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <title>Dream Journal</title>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
-  <title>Home Page</title>
 </head>
 
 <body>
-  
+
   {{{body}}}
+
+
 </body>
 
+<script type="text/javascript">
+  function toggleDarkLight() {
+    var body = document.getElementById("body");
+    var currentClass = body.className;
+    body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
+  }
+
+
+  var tagList = [];
+
+  $('.chips').chips();
+
+  $("#addChipBtn").click(function () {
+    var tag = {
+      tag: $(".tags").val().trim()
+    }
+    tagList.push(tag);
+    var newChip = $("<div>").addClass("chip");
+    newChip.text($(".tags").val().trim());
+    var deleteBtn = $("<i>").addClass("close material-icons").text("close");
+    newChip.append(deleteBtn);
+    $("#lg-Chips").append(newChip);
+    $(".tags").val("");
+    console.log(tagList);
+  })
+
+// DELETE FUNCTION NOT WORKING
+  //$('#lg-Chips').on("chip.delete", function () {
+  //  for (i = 0; i < tagList.length; i++) {
+  //    if (tagList[i] === this.val()) {
+  //      tagList.splice(i, 1);
+  //    }
+  //  }
+  //  console.log(tagList);
+  //});
+
+</script>
 
 </html>
