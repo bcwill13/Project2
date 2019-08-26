@@ -1,6 +1,39 @@
 var db = require("../models");
+var jwt = require("jsonwebtoken");
+var passport = require("passport");
+var passportJWT = require("passport-jwt");
 
 module.exports = function(app) {
+  var ExtractJwt = passportJWT.ExtractJwt;
+  var JwtStrategy = passportJWT.Strategy;
+
+  var jwtOptions = {};
+  jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+  jwtOptions.secretOrKey = "jwtsecret";
+
+  // lets create our strategy for web token
+  var strategy = new JwtStrategy(jwtOptions, function(jwtPayload, next) {
+    db.User.findOne({ id: jwtPayload.id }).then(function(user) {
+      if (user) {
+        next(null, user);
+      } else {
+        next(null, false);
+      }
+    });
+  });
+
+  passport.serializeUser(function(user, done) {
+    done(null, user);
+  });
+
+  passport.deserializeUser(function(user, done) {
+    done(null, user);
+  });
+
+  // use the strategy
+  passport.use(strategy);
+  app.use(passport.initialize());
+
   // Get all examples
   app.get("/api/examples", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
@@ -81,10 +114,6 @@ module.exports = function(app) {
   /**
    *  APIs for jurnals journal && tags
    */
-  // GET /api/journals/:journalId/tags
-  // GET /api/journals/:journalId/tags/:tagId
-  // POST /api/journals/:journalId/tags
-  // DELETE /api/journals/:journalId/tags/:tagId
 
   // Get all examples
   app.get("/api/journals/:journalId/tags", function(req, res) {
@@ -95,6 +124,7 @@ module.exports = function(app) {
 
   // Get a specific journal
   app.get("/api/journals/:journalId/tags/:tagId", function(req, res) {
+    //var journalId = req.params.journalId;
     var tagId = req.params.tagId;
     db.Journal.findAll({
       where: {
@@ -127,12 +157,6 @@ module.exports = function(app) {
   /**
    *  APIs for tags
    */
-
-  // GET /api/tags
-  // GET /api/tags/:tagId
-  // POST /api/tags
-  // DELETE /api/tags/:tagId
-
   // Get all examples
   app.get("/api/tags", function(req, res) {
     db.Tag.findAll({}).then(function(tags) {
@@ -143,7 +167,7 @@ module.exports = function(app) {
   // Get a specific journal
   app.get("/api/tags/:tagId", function(req, res) {
     var tagId = req.params.tagId;
-    db.Journal.findAll({
+    db.Tag.findAll({
       where: {
         id: tagId
       }
@@ -154,7 +178,7 @@ module.exports = function(app) {
 
   // Create a new example
   app.post("/api/tags", function(req, res) {
-    db.tag.create(req.body).then(function(tag) {
+    db.Tag.create(req.body).then(function(tag) {
       res.json(tag);
     });
   });
@@ -162,14 +186,59 @@ module.exports = function(app) {
   // Delete an example by id
   app.delete("/api/tags/:tagId", function(req, res) {
     var tagId = req.params.tagId;
-    db.tags
-      .destroy({
-        where: {
-          id: tagId
-        }
-      })
-      .then(function(tag) {
-        res.json(tag);
-      });
+    db.Tag.destroy({
+      where: {
+        id: tagId
+      }
+    }).then(function(tag) {
+      res.json(tag);
+    });
   });
+
+  /**
+   *  APIs for user authentication
+   */
+
+  // get all users
+  app.get("/users", function(req, res) {
+    db.User.findAll().then(function(users) {
+      res.json(users);
+    });
+  });
+
+  // register route
+  app.post("/register", function(req, res) {
+    db.User.create(req.body).then(function(user) {
+      res.json(user);
+    });
+  });
+
+  //login route
+  app.post("/login", function(req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    if (username && password) {
+      db.User.findOne({ username: username }).then(function(user) {
+        if (!user) {
+          res.status(401).json({ message: "User not found!" });
+        }
+        if (user.password === password) {
+          var payload = { id: user.id };
+          var token = jwt.sign(payload, jwtOptions.secretOrKey);
+          res.json({ msg: "ok", token: token });
+        } else {
+          res.status(401).json({ msg: "Password is incorrect" });
+        }
+      });
+    }
+  });
+
+  // protected route
+  app.get(
+    "/protected",
+    passport.authenticate("jwt", { session: true }),
+    function(req, res) {
+      res.json("Success! You can now see this without a token.");
+    }
+  );
 };
