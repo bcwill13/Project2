@@ -12,7 +12,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/journals",
+      url: "apix/journals",
       data: JSON.stringify(journal)
     });
   },
@@ -64,19 +64,28 @@ var refreshJournals = function() {
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
+  // var journal = {
+  //   title: $journalTitle.val().trim(),
+  //   description: $journalDescription.val().trim(),
+  //   tags: ["Hey", "I am", "an Initial Tag"]
+  // };
   var journal = {
-    title: $journalTitle.val().trim(),
-    description: $journalDescription.val().trim()
+    // debugging/temp
+    title: "journalTitle",
+    description: "journalDescription",
+    tags: ["Hey", "I am", "an Initial Tag"]
   };
+
+  //journal.tags.append($tags.val().trim());
 
   // if (!(journal.title && journal.description)) {
   //   alert("You must enter an journal title and description!");
   //   return;
   // }
-  if (!journal.description) {
-    alert("You must enter a dream description");
-    return;
-  }
+  // if (!journal.description) {
+  //   alert("You must enter a dream description");
+  //   return;
+  // }
 
   API.saveJournal(journal).then(function() {
     refreshJournals();
