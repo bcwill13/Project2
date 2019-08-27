@@ -1,5 +1,10 @@
 <li>
     <div class="row">
+        <h3>Entries with tag: {{name}}</h3>
+    </div>
+
+    {{#each journals}}
+    <div class="row">
         <div class="col s10 entryDescription">
             {{description}}
         </div>
@@ -8,11 +13,6 @@
             <button class="delete-entry btn-small" data-id="{{this.id}}"><i class="material-icons">cancel</i></button>
         </div>
     </div>
-    {{!-- <div class="row"> --}}
-    {{#each tags}}
-    <div class="chip tag" data-id="{{id}}"> {{this.name}}
-        <i class="close material-icons">close</i>
-    </div>
     {{/each}}
-    {{!-- </div> --}}
+
 </li>

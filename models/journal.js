@@ -14,8 +14,8 @@ module.exports = function(sequelize, DataTypes) {
   });
   Journal.associate = function(models) {
     Journal.belongsToMany(models.Tag, {
-      through: "JournalTag",
-      as: "tag",
+      through: "JournalTags",
+      as: "tags",
       foreignKey: "journalId"
     });
   };
