@@ -41,9 +41,7 @@
   $('.chips').chips();
 
   $("#addChipBtn").click(function () {
-    var tag = {
-      tag: $(".tags").val().trim()
-    }
+    var tag = $(".tags").val().trim();
     tagList.push(tag);
     var newChip = $("<div>").addClass("chip");
     newChip.text($(".tags").val().trim());
@@ -58,14 +56,11 @@
 
 
 
-  //$("i").on("click", ".close", function () {
-  //  for (i = 0; i < tagList.length; i++) {
-  //    if (tagList[i] === $(this).val()) {
-  //      tagList.splice(i, 1);
-  //    }
-  //  }
-  //  console.log(tagList);
-  //});
+  $(document).on("click", ".close", function () {
+    var thisTag = $(this)[0].parentElement.firstChild.data;
+    tagList = tagList.filter((tagObj) => tagObj !== thisTag);
+    console.log(tagList);
+  });
 
 </script>
 
