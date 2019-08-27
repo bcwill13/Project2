@@ -55,14 +55,14 @@ module.exports = function(app) {
           attributes: ["id", "description"],
           through: {
             // This block of code allows you to retrieve the properties of the join table
-            model: db.JournalTags,
+            model: db.JournalTag,
             as: "JournalTags"
           }
         }
       ]
     }).then(function(dbTag) {
       // If everything goes well respond with the journals
-      res.render("tag", {
+      res.render("allTags", {
         tags: dbTag
       });
     });
