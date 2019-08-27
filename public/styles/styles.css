@@ -109,10 +109,12 @@ body.light-mode #submit {
   background-color: white;
 } */
 
-.entryDescription {
+/* .entryDescription {
   border: 1px solid black;
-}
+} */
 
 li {
+  border: 1px solid black;
   margin: 5px;
+  margin-bottom: 10px;
 }
