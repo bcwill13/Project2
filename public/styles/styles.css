@@ -1,47 +1,113 @@
 body.dark-mode {
-  background-color: #111;
+  background-image: url("https://steamuserimages-a.akamaihd.net/ugc/270598716228094303/D09D43F7AF5CE184E5A79C3A8F706B2A3BB64E2F/");
   color: #eee;
+  background-position: center;
+  background-size: 106%;
+  color: white;
 }
 body.dark-mode a {
   color: #111;
 }
-body.dark-mode button {
-  background-color: #eee;
-  color: #111;
+body.dark-mode #submit {
+  background-color: #854085;
+  color: #d1d1d1;
 }
 body.light-mode {
-  background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png");
+  background-image: url("https://steamuserimages-a.akamaihd.net/ugc/100603690261137263/38837F55ADABD92873219D525D45F3D474B9F789/");
   color: #111;
+  background-position: center;
+  background-size: 106%;
 }
 body.light-mode a {
   color: #111;
 }
 body.light-mode button {
-  background-color: #111;
-  color: #eee;
+  background-color: #DF7492;
+  color: #E9EBE6;
 }
 .list-group-item {
   line-height: 2.5;
 }
 
-/* body {
-  background-image: url("https://webgradients.com/public/webgradients_png/008%20Rainy%20Ashville.png");
-  background-attachment: scroll;
-  object-fit: contain;
-  margin: 0;
-  padding: 0;
+body.dark-mode #journal {
+  text-align: center;
+  /* font-family: 'Luckiest Guy', cursive; */
+  /* font-family: 'Pacifico', cursive; */
+  font-family: 'Bungee Shade', cursive;
+
 }
 
-.container {
-  position: absolute;
-  top: 0;
-  left: 10%;
-  width: 100%;
-  height: 100vh;
-  box-sizing: border-box;
-  padding: 100px;
+body.light-mode #journal {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  color: #DF7492;
+  text-shadow:
+		-1px -1px 0 #E9EBE6,
+		1px -1px 0 #E9EBE6,
+		-1px 1px 0 #E9EBE6,
+		1px 1px 0 #E9EBE6;;
 }
-  */
+ 
+
+body.dark-mode h2 {
+  color: #ffce0f;
+  -webkit-animation-name: example;
+  -webkit-animation-duration: 60s;
+  animation-name: example;
+  animation-duration: 60s;
+}
+@keyframes example {
+  0% {color: #f34c37;}
+  25% {color: #ffce0f;}
+  50% {color: #f34c37;}
+  100% {color: #ffce0f;}
+}
+body.dark-mode .form-control {
+  background-color: #2F4562;
+  color: #d1d1d1;
+}
+
+body.dark-mode .tags {
+  background-color: #2F4562;
+  color: #d1d1d1;
+}
+
+body.light-mode .form-control {
+  background-color: #5382A0;
+  color: #E9EBE6;
+}
+
+body.light-mode .tags {
+  background-color: #5382A0;
+  color: #E9EBE6;
+}
+
+body.dark-mode #addChipBtn {
+  background-color: #854085;
+}
+
+body.light-mode #addChipBtn {
+  background-color: #DF7492;
+}
+
+body.light-mode #submit {
+  background-color: #DF7492;
+}
+
+
+
+
+/* body.dark-mode label {
+  background-color: lightgray;
+  padding: 0px;
+} */
+/* .form-control {
+  background-color: white;
+}
+
+#journal-title {
+  background-color: white;
+} */
 
 .entryDescription {
   border: 1px solid black;
