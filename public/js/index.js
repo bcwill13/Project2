@@ -81,12 +81,12 @@ var handleFormSubmit = function(event) {
   //   tags: ["Hey", "I am", "an Initial Tag"]
   // };
   // above is real, below makes debugging easier
-  var journal = {
-    // debugging/temp
-    title: "journalTitle",
-    description: "journalDescription",
-    tags: ["Hey", "I am", "an Initial Tag"]
-  };
+  // var journal = {
+  //   // debugging/temp
+  //   title: "journalTitle",
+  //   description: "journalDescription",
+  //   tags: ["Hey", "I am", "an Initial Tag"]
+  // };
 
   // validity checks
   // *** V1 - check that both desc and title are filled in
