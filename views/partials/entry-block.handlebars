@@ -1,6 +1,6 @@
 <li>
     <div class="row">
-        <div class="col s8 entryDescription">
+        <div class="col s10 entryDescription">
             {{description}}
         </div>
         <div class="col s2">
@@ -8,11 +8,11 @@
             <button class="delete-entry btn-small" data-id="{{this.id}}"><i class="material-icons">cancel</i></button>
         </div>
     </div>
-    <div class="row">
-        {{#each tags}}
-        <div class="chip tag" data-id="{{id}}"> {{this.name}}
-            <i class="close material-icons">close</i>
-        </div>
-        {{/each}}
+    {{!-- <div class="row"> --}}
+    {{#each tags}}
+    <div class="chip tag" data-id="{{id}}"> {{this.name}}
+        <i class="close material-icons">close</i>
     </div>
+    {{/each}}
+    {{!-- </div> --}}
 </li>
