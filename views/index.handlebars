@@ -1,9 +1,12 @@
+<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Luckiest+Guy|Pacifico&display=swap" rel="stylesheet">
 <body id="body" class="dark-mode">
   <button type="button" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode">🌛</button>
   <div id="home">
     <div class="container">
 
-      <div class="row">
+      <div class="row" id="journal">
         <h1>{{msg}}</h1>
         <h2>Dream Journal</h2>
       </div>
@@ -29,7 +32,7 @@
               <input class="tags" type="text" placeholder="Enter tag" />
             </div>
             <div class="col s2">
-              <a id="addChipBtn" class="waves-effect waves-light btn"><i class="material-icons">add</i></a>
+              <a id="addChipBtn" class="waves-effect waves-light btn"><i class="material-icons" id= "submit">add</i></a>
             </div>
             <div class="col s4">
               <div id="lg-Chips"></div>
