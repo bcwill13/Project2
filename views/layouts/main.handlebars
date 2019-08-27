@@ -36,6 +36,8 @@
 
   var tagList = [];
 
+  var autoCompList = {};
+
   $('.chips').chips();
 
   $("#addChipBtn").click(function () {
@@ -48,9 +50,12 @@
     var deleteBtn = $("<i>").addClass("close material-icons").text("close");
     newChip.append(deleteBtn);
     $("#lg-Chips").append(newChip);
+    // add new tag to autocomplete list function goes here
     $(".tags").val("");
     console.log(tagList);
   })
+
+
 
 
   //$("i").on("click", ".close", function () {
