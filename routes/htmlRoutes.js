@@ -20,14 +20,14 @@ module.exports = function(app) {
       include: [
         {
           model: db.Tag,
-          as: "tag",
+          as: "tags",
           required: false,
           // Pass in the TAG attributes that you want to retrieve
           attributes: ["id", "name"],
           through: {
             // This block of code allows you to retrieve the properties of the join table
             model: db.JournalTag,
-            as: "JournalTag"
+            as: "JournalTags"
           }
         }
       ]
