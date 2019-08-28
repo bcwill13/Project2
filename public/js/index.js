@@ -63,7 +63,7 @@ var refreshJournals = function() {
 // Save the new journal to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
-  console.log("handleFormSubmit called"); // not seeing this in any console!
+  console.log("handleFormSubmit called tagList" + tagList);
   // var tagsArray = [];
   // // fetching tags from gui...
   // $(".chip").each(function() {
