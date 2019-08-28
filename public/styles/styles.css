@@ -97,8 +97,30 @@ body.light-mode #submit {
   background-color: #DF7492;
 }
 
+body.dark-mode li {
+  background-color: #5382A0;
+  color: #E9EBE6;
+}
 
+body.dark-mode #entries {
+  text-align: center;
+  font-family: 'Bungee Inline', cursive;
+}
 
+body.dark-mode button {
+  background-color: #854085;
+  color: #d1d1d1;
+}
+
+body.light-mode li {
+  background-color: #5382A0;
+  color: #E9EBE6;
+}
+
+body.light-mode #entries {
+  text-align: center;
+  font-family: 'Bungee Inline', cursive;
+}
 
 /* body.dark-mode label {
   background-color: lightgray;
