@@ -33,13 +33,16 @@ body.dark-mode #journal {
   text-align: center;
   /* font-family: 'Luckiest Guy', cursive; */
   /* font-family: 'Pacifico', cursive; */
-  font-family: 'Bungee Shade', cursive;
+  /* font-family: 'Bungee Shade', cursive; */
+  font-family: 'Bungee Inline', cursive;
+
 
 }
 
 body.light-mode #journal {
   text-align: center;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Bungee Inline', cursive;
+
   color: #DF7492;
   text-shadow:
 		-1px -1px 0 #E9EBE6,
