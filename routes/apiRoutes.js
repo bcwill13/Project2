@@ -173,7 +173,7 @@ module.exports = function(app) {
               journalId: dbJournal.id,
               tagId: existingTag[0].id
             }).then(function(dbTagId) {
-              //console.log(dbTagId);
+              console.log(dbTagId);
             });
           } else {
             console.log("no tag");
@@ -184,7 +184,7 @@ module.exports = function(app) {
                 journalId: dbJournal.id,
                 tagId: createdTag.id
               }).then(function(dbTagId) {
-                //console.log(dbTagId);
+                console.log(dbTagId);
               });
             });
           }
@@ -377,40 +377,40 @@ module.exports = function(app) {
   );
 };
 
-function createTag2(newTag, tagIdArray) {
-  console.log("createTag2 newTag = " + newTag);
+// function createTag2(newTag, tagIdArray) {
+//   console.log("createTag2 newTag = " + newTag);
 
-  // db.Tag.upsert({ name: newTag }, { returning: true }).then(function(dbTag) {
-  //   console.log("this", dbTag);
-  //   if (dbTag) {
-  //     //res.status(200);
-  //     //res.send("Successfully stored");
-  //     console.log("stored:" + JSON.stringify(dbTag));
-  //   } else {
-  //     //res.status(200);
-  //     //res.send("Successfully inserted");
-  //     console.log("inserted:" + JSON.stringify(dbTag));
-  //   }
-  // });
+//   // db.Tag.upsert({ name: newTag }, { returning: true }).then(function(dbTag) {
+//   //   console.log("this", dbTag);
+//   //   if (dbTag) {
+//   //     //res.status(200);
+//   //     //res.send("Successfully stored");
+//   //     console.log("stored:" + JSON.stringify(dbTag));
+//   //   } else {
+//   //     //res.status(200);
+//   //     //res.send("Successfully inserted");
+//   //     console.log("inserted:" + JSON.stringify(dbTag));
+//   //   }
+//   // });
 
-  //tagIdArray.push("1");
-  // line above exists only to satify eslint/travis, remove it before debugging
-  db.Tag.findAll({
-    limit: 1,
-    where: { name: newTag }
-  }).then(function(existingTag) {
-    if (existingTag[0]) {
-      console.log("existingTag:" + JSON.stringify(existingTag));
-      console.log("existingTag.id: " + existingTag[0].id);
-      tagIdArray.push(existingTag[0].id);
-    } else {
-      console.log("no tag");
-      db.Tag.create({ name: newTag }).then(function(createdTag) {
-        //console.log(JSON.stringify(createdTag));
-        console.log("createdTag: " + JSON.stringify(createdTag));
-        tagIdArray.push(createdTag.id);
-      });
-    }
-    console.log(tagIdArray);
-  });
-}
+//   //tagIdArray.push("1");
+//   // line above exists only to satify eslint/travis, remove it before debugging
+//   db.Tag.findAll({
+//     limit: 1,
+//     where: { name: newTag }
+//   }).then(function(existingTag) {
+//     if (existingTag[0]) {
+//       console.log("existingTag:" + JSON.stringify(existingTag));
+//       console.log("existingTag.id: " + existingTag[0].id);
+//       tagIdArray.push(existingTag[0].id);
+//     } else {
+//       console.log("no tag");
+//       db.Tag.create({ name: newTag }).then(function(createdTag) {
+//         //console.log(JSON.stringify(createdTag));
+//         console.log("createdTag: " + JSON.stringify(createdTag));
+//         tagIdArray.push(createdTag.id);
+//       });
+//     }
+//     console.log(tagIdArray);
+//   });
+// }
