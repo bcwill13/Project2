@@ -22,8 +22,8 @@ body.light-mode a {
   color: #111;
 }
 body.light-mode button {
-  background-color: #DF7492;
-  color: #E9EBE6;
+  background-color: #df7492;
+  color: #e9ebe6;
 }
 .list-group-item {
   line-height: 2.5;
@@ -33,8 +33,10 @@ body.dark-mode #journal {
   text-align: center;
   /* font-family: 'Luckiest Guy', cursive; */
   /* font-family: 'Pacifico', cursive; */
+
   /* font-family: 'Bungee Shade', cursive; */
   font-family: 'Bungee Inline', cursive;
+
 
 
 }
@@ -51,6 +53,8 @@ body.light-mode #journal {
 		1px 1px 0 #E9EBE6;;
 }
  
+}
+
 
 body.dark-mode h2 {
   color: #ffce0f;
@@ -60,29 +64,37 @@ body.dark-mode h2 {
   animation-duration: 60s;
 }
 @keyframes example {
-  0% {color: #f34c37;}
-  25% {color: #ffce0f;}
-  50% {color: #f34c37;}
-  100% {color: #ffce0f;}
+  0% {
+    color: #f34c37;
+  }
+  25% {
+    color: #ffce0f;
+  }
+  50% {
+    color: #f34c37;
+  }
+  100% {
+    color: #ffce0f;
+  }
 }
 body.dark-mode .form-control {
-  background-color: #2F4562;
+  background-color: #2f4562;
   color: #d1d1d1;
 }
 
 body.dark-mode .tags {
-  background-color: #2F4562;
+  background-color: #2f4562;
   color: #d1d1d1;
 }
 
 body.light-mode .form-control {
-  background-color: #5382A0;
-  color: #E9EBE6;
+  background-color: #5382a0;
+  color: #e9ebe6;
 }
 
 body.light-mode .tags {
-  background-color: #5382A0;
-  color: #E9EBE6;
+  background-color: #5382a0;
+  color: #e9ebe6;
 }
 
 body.dark-mode #addChipBtn {
@@ -90,11 +102,11 @@ body.dark-mode #addChipBtn {
 }
 
 body.light-mode #addChipBtn {
-  background-color: #DF7492;
+  background-color: #df7492;
 }
 
 body.light-mode #submit {
-  background-color: #DF7492;
+  background-color: #df7492;
 }
 
 body.dark-mode li {
@@ -122,6 +134,7 @@ body.light-mode #entries {
   font-family: 'Bungee Inline', cursive;
 }
 
+
 /* body.dark-mode label {
   background-color: lightgray;
   padding: 0px;
@@ -142,4 +155,5 @@ li {
   border: 1px solid black;
   margin: 5px;
   margin-bottom: 10px;
+  background: lightgrey;
 }
