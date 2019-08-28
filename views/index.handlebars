@@ -1,53 +1,44 @@
-<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Pacifico&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Luckiest+Guy|Pacifico&display=swap" rel="stylesheet">
-<body id="body" class="dark-mode">
-  <button type="button" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode">🌛</button>
-  <div id="home">
-    <div class="container">
+<div id="home">
+  <div class="container">
 
-      <div class="row" id="journal">
-        <h1>{{msg}}</h1>
-        <h2>Dream Journal</h2>
+    <div class="row" id="journal">
+      <h1>{{msg}}</h1>
+      <h2>Dream Journal</h2>
+    </div>
+
+    <form class="clearfix mb-4" action="POST">
+
+      <div class="row">
+        <div class="form-group">
+          <label for="journal-title">Title</label>
+          <input type="text" id="journal-title" class="form-control" aria-describedby="journal-title"
+            placeholder="Enter Dream Title (optional)" />
+        </div>
       </div>
 
-      <form class="clearfix mb-4" action="POST">
+      <div class="row">
+        <label for="journal-description">Dream Description</label>
+        <textarea class="form-control" id="journal-description" placeholder="Enter Dream Description"></textarea>
+      </div>
 
-        <div class="row">
-          <div class="form-group">
-            <label for="journal-title">Title</label>
-            <input type="text" id="journal-title" class="form-control" aria-describedby="journal-title"
-              placeholder="Enter Dream Title (optional)" />
+      <div class="row">
+        <div class="form-group">
+          <div class="col s4">
+            <input class="tags" type="text" placeholder="Enter tag" />
+          </div>
+          <div class="col s2">
+            <a id="addChipBtn" class="waves-effect waves-light btn"><i class="material-icons" id="submit">add</i></a>
+          </div>
+          <div class="col s4">
+            <div id="lg-Chips"></div>
           </div>
         </div>
-
-        <div class="row">
-          <label for="journal-description">Dream Description</label>
-          <textarea class="form-control" id="journal-description" placeholder="Enter Dream Description"></textarea>
-        </div>
-
-        <div class="row">
-          <div class="form-group">
-            <div class="col s4">
-              <input class="tags" type="text" placeholder="Enter tag" />
-            </div>
-            <div class="col s2">
-              <a id="addChipBtn" class="waves-effect waves-light btn"><i class="material-icons" id= "submit">add</i></a>
-            </div>
-            <div class="col s4">
-              <div id="lg-Chips"></div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <button class="btn waves-effect waves-light" id="submit" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="row">
+        <button class="btn waves-effect waves-light" id="submit" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </form>
   </div>
-</body>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+</div>
