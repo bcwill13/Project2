@@ -113,7 +113,9 @@ module.exports = function(app) {
       tagIdArray.forEach(createJournalTag);
       function createJournalTag(tagIdItem) {
         console.log("tagIdItem:" + tagIdItem);
-        db.JournalTag.create({ journalId: "1", tagId: "1" }).then(function(dbTagId) {
+        db.JournalTag.create({ journalId: "1", tagId: "1" }).then(function(
+          dbTagId
+        ) {
           console.log(dbTagId);
         });
       }
