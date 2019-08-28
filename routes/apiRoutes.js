@@ -34,13 +34,6 @@ module.exports = function(app) {
   passport.use(strategy);
   app.use(passport.initialize());
 
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
-
   // app.get("/api/journals", function(req, res) {
   //   db.Journal.findAll({}).then(function(dbJournals) {
   //     res.json(dbJournals);
@@ -92,9 +85,7 @@ module.exports = function(app) {
   // }));
 
   app.post("/apix/journals", function(req, res) {
-    console.log(
-      "app.post using req.body of: '" + JSON.stringify(req.body) + "'"
-    );
+    console.log("app.post using req.body of: '" + JSON.stringify(req.body) + "'");
     //const createdJournal = await db.Journal.create(req.body);
     //createdJournal.addTags(req.body.tags);
     //Create and save the order
@@ -106,37 +97,20 @@ module.exports = function(app) {
       function createTag1(newTag, index) {
         console.log("createTag1 at index:" + index + " = " + newTag);
         createTag3(newTag, tagIdArray, function() {
-          console.log(
-            "completed first loop and calls to createTag3 tagIdArray:" +
-              JSON.stringify(tagIdArray)
-          );
+          console.log("completed first loop and calls to createTag3 tagIdArray:" + JSON.stringify(tagIdArray));
         });
       }
-      console.log(
-        "***completed first loop and calls to createTag3 tagIdArray:" +
-          JSON.stringify(tagIdArray)
-      );
+      console.log("***completed first loop and calls to createTag3 tagIdArray:" + JSON.stringify(tagIdArray));
       // Loop through all tagIDs creating the linking table entries
       tagIdArray.forEach(createJournalTag);
       function createJournalTag(tagIdItem) {
         console.log("tagIdItem:" + tagIdItem);
-        db.JournalTag.create({ journalId: "1", tagId: "1" }).then(function(
-          dbTagId
-        ) {
+        db.JournalTag.create({ journalId: "1", tagId: "1" }).then(function(dbTagId) {
           console.log(dbTagId);
         });
       }
 
       res.json(dbJournal);
-    });
-  });
-
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.json(dbExample);
     });
   });
 
@@ -305,13 +279,9 @@ module.exports = function(app) {
   });
 
   // protected route
-  app.get(
-    "/protected",
-    passport.authenticate("jwt", { session: true }),
-    function(req, res) {
-      res.json("Success! You can now see this without a token.");
-    }
-  );
+  app.get("/protected", passport.authenticate("jwt", { session: true }), function(req, res) {
+    res.json("Success! You can now see this without a token.");
+  });
 };
 
 function createTag3(newTag, tagIdArray) {
