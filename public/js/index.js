@@ -78,13 +78,13 @@ var handleFormSubmit = function(event) {
     description: $journalDescription.val().trim(),
     tags: tagList
   };
-  // above is real, below makes debugging easier
-  var journal = {
-    // debugging/temp
-    title: "journalTitle",
-    description: "journalDescription",
-    tags: ["Hey", "I am", "newTag8"]
-  };
+  // // above is real, below makes debugging easier
+  // var journal = {
+  //   // debugging/temp
+  //   title: "journalTitle",
+  //   description: "journalDescription",
+  //   tags: ["Hey", "I am", "newTag8"]
+  // };
 
   // validity checks
   // *** V1 - check that both desc and title are filled in

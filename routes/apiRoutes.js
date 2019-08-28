@@ -91,63 +91,105 @@ module.exports = function(app) {
   //   return res.status(200).json(savedJournal)
   // }));
 
+  // app.post("/apix/journals", function(req, res) {
+  //   console.log(
+  //     "app.post using req.body of: '" + JSON.stringify(req.body) + "'"
+  //   );
+  //   // const createdJournal = await db.Journal.create(req.body);
+  //   // createdJournal.addTags(req.body.tags);
+  //   //Create and save the order
+  //   db.Journal.create(req.body).then(function(dbJournal) {
+  //     //console.log(dbJournal);
+  //     //dbJournal.addTags(req.body.tags);
+  //     console.log(req.body.tags);
+  //     var tagIdArray = [];
+  //     // // Loop through all tags
+  //     createAllTags(function() {
+  //       tagIdArray = [1, 2, 3]; // obvious BS
+  //       console.log(
+  //         "tagIdArray [" +
+  //           tagIdArray +
+  //           "] - fudged values to test JournalTag.create"
+  //       );
+  //       // Loop through all tagIDs creating the linking table entries
+  //       if (tagIdArray.length > 0) {
+  //         tagIdArray.forEach(createJournalTag);
+  //         function createJournalTag(tagIdArrayItem) {
+  //           console.log(
+  //             "tagIdArrayItem: " +
+  //               tagIdArrayItem +
+  //               " dbJournal.id: " +
+  //               dbJournal.id
+  //           );
+  //           db.JournalTag.create({
+  //             journalId: dbJournal.id,
+  //             tagId: tagIdArrayItem
+  //           }).then(function(dbTagId) {
+  //             console.log(dbTagId);
+  //           });
+  //         }
+  //       } else {
+  //         console.log("unable to create linking journaltag records.");
+  //       }
+  //     });
+  //     function createAllTags(cb) {
+  //       req.body.tags.forEach(createTag1);
+  //       function createTag1(newTag, index) {
+  //         console.log("createTag1 at index:" + index + " = " + newTag);
+  //         createTag2(newTag, tagIdArray, function() {
+  //           console.log("one loop done:" + JSON.stringify(idArray));
+  //         });
+  //       }
+  //       cb();
+  //     }
+  //     console.log(
+  //       "***completed first loop and calls to createTag3 tagIdArray:" +
+  //         JSON.stringify(tagIdArray)
+  //     );
+  //     console.log("here");
+
+  //     res.json(dbJournal);
+  //   });
+  // });
+
   app.post("/apix/journals", function(req, res) {
     console.log(
       "app.post using req.body of: '" + JSON.stringify(req.body) + "'"
     );
-    // const createdJournal = await db.Journal.create(req.body);
-    // createdJournal.addTags(req.body.tags);
-    //Create and save the order
     db.Journal.create(req.body).then(function(dbJournal) {
-      //console.log(dbJournal);
-      //dbJournal.addTags(req.body.tags);
       console.log(req.body.tags);
-      var tagIdArray = [];
-      // // Loop through all tags
-      createAllTags(function() {
-        tagIdArray = [1, 2, 3];
-        console.log(
-          "tagIdArray [" +
-            tagIdArray +
-            "] - fudged values to test JournalTag.create"
-        );
-        // Loop through all tagIDs creating the linking table entries
-        if (tagIdArray.length > 0) {
-          tagIdArray.forEach(createJournalTag);
-          function createJournalTag(tagIdArrayItem) {
-            console.log(
-              "tagIdArrayItem: " +
-                tagIdArrayItem +
-                " dbJournal.id: " +
-                dbJournal.id
-            );
+      // Loop through all tagIDs creating the linking table entries
+      req.body.tags.forEach(function(newTag, index) {
+        console.log("createTag1 at index:" + index + " = " + newTag);
+        console.log("createTag2 newTag = " + newTag);
+        db.Tag.findAll({
+          limit: 1,
+          where: { name: newTag }
+        }).then(function(existingTag) {
+          if (existingTag[0]) {
+            console.log("existingTag:" + JSON.stringify(existingTag));
+            console.log("existingTag.id: " + existingTag[0].id);
             db.JournalTag.create({
               journalId: dbJournal.id,
-              tagId: tagIdArrayItem
+              tagId: existingTag[0].id
             }).then(function(dbTagId) {
-              console.log(dbTagId);
+              //console.log(dbTagId);
+            });
+          } else {
+            console.log("no tag");
+            db.Tag.create({ name: newTag }).then(function(createdTag) {
+              console.log(createdTag.id);
+              console.log("createdTag: " + JSON.stringify(createdTag));
+              db.JournalTag.create({
+                journalId: dbJournal.id,
+                tagId: createdTag.id
+              }).then(function(dbTagId) {
+                //console.log(dbTagId);
+              });
             });
           }
-        } else {
-          console.log("unable to create linking journaltag records.");
-        }
+        });
       });
-      function createAllTags(cb) {
-        req.body.tags.forEach(createTag1);
-        function createTag1(newTag, index) {
-          console.log("createTag1 at index:" + index + " = " + newTag);
-          createTag2(newTag, tagIdArray, function() {
-            console.log("one loop done:" + JSON.stringify(idArray));
-          });
-        }
-        cb();
-      }
-      console.log(
-        "***completed first loop and calls to createTag3 tagIdArray:" +
-          JSON.stringify(tagIdArray)
-      );
-      console.log("here");
-
       res.json(dbJournal);
     });
   });
