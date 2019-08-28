@@ -17,9 +17,14 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy|Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Luckiest+Guy|Pacifico&display=swap" rel="stylesheet">
+  <script src="/js/index.js"></script>
 </head>
 
-<body>
+<body id="body" class="dark-mode">
+  <button type="button" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode">🌛</button>
 
   {{{body}}}
 
@@ -36,31 +41,31 @@
 
   var tagList = [];
 
-  //$('.chips').chips();
+  var autoCompList = {};
+
+  $('.chips').chips();
 
   $("#addChipBtn").click(function () {
-    var tag = {
-      tag: $(".tags").val().trim()
-    }
+    var tag = $(".tags").val().trim();
     tagList.push(tag);
     var newChip = $("<div>").addClass("chip");
     newChip.text($(".tags").val().trim());
     var deleteBtn = $("<i>").addClass("close material-icons").text("close");
     newChip.append(deleteBtn);
     $("#lg-Chips").append(newChip);
+    // add new tag to autocomplete list function goes here
     $(".tags").val("");
     console.log(tagList);
   })
 
 
-  //$("i").on("click", ".close", function () {
-  //  for (i = 0; i < tagList.length; i++) {
-  //    if (tagList[i] === $(this).val()) {
-  //      tagList.splice(i, 1);
-  //    }
-  //  }
-  //  console.log(tagList);
-  //});
+
+
+  $(document).on("click", ".close", function () {
+    var thisTag = $(this)[0].parentElement.firstChild.data;
+    tagList = tagList.filter((tagObj) => tagObj !== thisTag);
+    console.log(tagList);
+  });
 
 </script>
 
