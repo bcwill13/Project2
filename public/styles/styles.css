@@ -33,15 +33,28 @@ body.dark-mode #journal {
   text-align: center;
   /* font-family: 'Luckiest Guy', cursive; */
   /* font-family: 'Pacifico', cursive; */
-  font-family: "Bungee Shade", cursive;
+
+  /* font-family: 'Bungee Shade', cursive; */
+  font-family: 'Bungee Inline', cursive;
+
+
+
 }
 
 body.light-mode #journal {
   text-align: center;
-  font-family: "Pacifico", cursive;
-  color: #df7492;
-  text-shadow: -1px -1px 0 #e9ebe6, 1px -1px 0 #e9ebe6, -1px 1px 0 #e9ebe6, 1px 1px 0 #e9ebe6;
+  font-family: 'Bungee Inline', cursive;
+
+  color: #DF7492;
+  text-shadow:
+		-1px -1px 0 #E9EBE6,
+		1px -1px 0 #E9EBE6,
+		-1px 1px 0 #E9EBE6,
+		1px 1px 0 #E9EBE6;;
 }
+ 
+}
+
 
 body.dark-mode h2 {
   color: #ffce0f;
@@ -95,6 +108,32 @@ body.light-mode #addChipBtn {
 body.light-mode #submit {
   background-color: #df7492;
 }
+
+body.dark-mode li {
+  background-color: #5382A0;
+  color: #E9EBE6;
+}
+
+body.dark-mode #entries {
+  text-align: center;
+  font-family: 'Bungee Inline', cursive;
+}
+
+body.dark-mode button {
+  background-color: #854085;
+  color: #d1d1d1;
+}
+
+body.light-mode li {
+  background-color: #5382A0;
+  color: #E9EBE6;
+}
+
+body.light-mode #entries {
+  text-align: center;
+  font-family: 'Bungee Inline', cursive;
+}
+
 
 /* body.dark-mode label {
   background-color: lightgray;
