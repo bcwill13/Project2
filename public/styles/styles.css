@@ -31,14 +31,7 @@ body.light-mode button {
 
 body.dark-mode #journal {
   text-align: center;
-  /* font-family: 'Luckiest Guy', cursive; */
-  /* font-family: 'Pacifico', cursive; */
-
-  /* font-family: 'Bungee Shade', cursive; */
   font-family: 'Bungee Inline', cursive;
-
-
-
 }
 
 body.light-mode #journal {
@@ -52,9 +45,6 @@ body.light-mode #journal {
 		-1px 1px 0 #E9EBE6,
 		1px 1px 0 #E9EBE6;;
 }
- 
-}
-
 
 body.dark-mode h2 {
   color: #ffce0f;
@@ -156,4 +146,13 @@ li {
   margin: 5px;
   margin-bottom: 10px;
   background: lightgrey;
+}
+
+body.dark-mode #dark-light {
+  float: right;
+  
+}
+
+body.light-mode #dark-light {
+  float: right;
 }
