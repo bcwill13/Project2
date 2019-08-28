@@ -105,17 +105,31 @@ module.exports = function(app) {
       var tagIdArray = [];
       // // Loop through all tags
       createAllTags(function() {
+        tagIdArray = [1, 2, 3];
+        console.log(
+          "tagIdArray [" +
+            tagIdArray +
+            "] - fudged values to test JournalTag.create"
+        );
         // Loop through all tagIDs creating the linking table entries
-        req.body.tags.forEach(createJournalTag);
-        function createJournalTag(tagIdItem) {
-          console.log("tagIdItem:" + tagIdItem);
-          //console.log(db.models.JournalTags);
-          db.JournalTags.create({
-            journalId: dbJournal.id,
-            tagId: tagIdItem
-          }).then(function(dbTagId) {
-            console.log(dbTagId);
-          });
+        if (tagIdArray.length > 0) {
+          tagIdArray.forEach(createJournalTag);
+          function createJournalTag(tagIdArrayItem) {
+            console.log(
+              "tagIdArrayItem: " +
+                tagIdArrayItem +
+                " dbJournal.id: " +
+                dbJournal.id
+            );
+            db.JournalTag.create({
+              journalId: dbJournal.id,
+              tagId: tagIdArrayItem
+            }).then(function(dbTagId) {
+              console.log(dbTagId);
+            });
+          }
+        } else {
+          console.log("unable to create linking journaltag records.");
         }
       });
       function createAllTags(cb) {
