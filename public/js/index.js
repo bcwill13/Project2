@@ -63,29 +63,27 @@ var refreshJournals = function() {
 // Save the new journal to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
-  console.log("handleFormSubmit called"); // not seeing this in any console!
-  var tagsArray = [];
-  // fetching tags from gui...
-  $("chip").each(function() {
-    tagsArray.push(
-      $(this)
-        .val()
-        .trim()
-    );
-  });
-  console.log("tagsArray:" + JSON.stringify(tagsArray));
-
-  // var journal = {
-  //   title: $journalTitle.val().trim(),
-  //   description: $journalDescription.val().trim(),
-  //   tags: ["Hey", "I am", "an Initial Tag"]
-  // };
-  // above is real, below makes debugging easier
+  console.log("handleFormSubmit called tagList" + tagList);
+  // var tagsArray = [];
+  // // fetching tags from gui...
+  // $(".chip").each(function() {
+  //   var chipname = $(this)
+  //     .val()
+  //     .trim();
+  //   tagsArray.push(chipname);
+  // });
+  // console.log("tagsArray:" + JSON.stringify(tagsArray));
+  var journal = {
+    title: $journalTitle.val().trim(),
+    description: $journalDescription.val().trim(),
+    tags: tagList
+  };
+  // // above is real, below makes debugging easier
   // var journal = {
   //   // debugging/temp
   //   title: "journalTitle",
   //   description: "journalDescription",
-  //   tags: ["Hey", "I am", "an Initial Tag"]
+  //   tags: ["Hey", "I am", "newTag8"]
   // };
 
   // validity checks
@@ -95,14 +93,14 @@ var handleFormSubmit = function(event) {
   //   return;
   // }
   // *** V2 - check only that desc is filled in
-  // if (!journal.description) {
-  //   alert("You must enter a dream description");
-  //   return;
-  // }
+  if (!journal.description) {
+    alert("You must enter a dream description");
+    return;
+  }
 
-  // API.saveJournal(journal).then(function() {
-  //   refreshJournals();
-  // });
+  API.saveJournal(journal).then(function() {
+    refreshJournals();
+  });
 
   $journalTitle.val("");
   $journalDescription.val("");
