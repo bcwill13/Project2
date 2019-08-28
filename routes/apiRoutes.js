@@ -95,37 +95,44 @@ module.exports = function(app) {
     console.log(
       "app.post using req.body of: '" + JSON.stringify(req.body) + "'"
     );
-    //const createdJournal = await db.Journal.create(req.body);
-    //createdJournal.addTags(req.body.tags);
+    // const createdJournal = await db.Journal.create(req.body);
+    // createdJournal.addTags(req.body.tags);
     //Create and save the order
     db.Journal.create(req.body).then(function(dbJournal) {
+      //console.log(dbJournal);
       //dbJournal.addTags(req.body.tags);
+      console.log(req.body.tags);
       var tagIdArray = [];
-      // Loop through all tags
-      req.body.tags.forEach(createTag1);
-      function createTag1(newTag, index) {
-        console.log("createTag1 at index:" + index + " = " + newTag);
-        createTag3(newTag, tagIdArray, function() {
-          console.log(
-            "completed first loop and calls to createTag3 tagIdArray:" +
-              JSON.stringify(tagIdArray)
-          );
-        });
+      // // Loop through all tags
+      createAllTags(function() {
+        // Loop through all tagIDs creating the linking table entries
+        req.body.tags.forEach(createJournalTag);
+        function createJournalTag(tagIdItem) {
+          console.log("tagIdItem:" + tagIdItem);
+          //console.log(db.models.JournalTags);
+          db.JournalTags.create({
+            journalId: dbJournal.id,
+            tagId: tagIdItem
+          }).then(function(dbTagId) {
+            console.log(dbTagId);
+          });
+        }
+      });
+      function createAllTags(cb) {
+        req.body.tags.forEach(createTag1);
+        function createTag1(newTag, index) {
+          console.log("createTag1 at index:" + index + " = " + newTag);
+          createTag2(newTag, tagIdArray, function() {
+            console.log("one loop done:" + JSON.stringify(idArray));
+          });
+        }
+        cb();
       }
       console.log(
         "***completed first loop and calls to createTag3 tagIdArray:" +
           JSON.stringify(tagIdArray)
       );
-      // Loop through all tagIDs creating the linking table entries
-      tagIdArray.forEach(createJournalTag);
-      function createJournalTag(tagIdItem) {
-        console.log("tagIdItem:" + tagIdItem);
-        db.JournalTag.create({ journalId: "1", tagId: "1" }).then(function(
-          dbTagId
-        ) {
-          console.log(dbTagId);
-        });
-      }
+      console.log("here");
 
       res.json(dbJournal);
     });
@@ -314,35 +321,40 @@ module.exports = function(app) {
   );
 };
 
-function createTag3(newTag, tagIdArray) {
-  console.log("createTag3 newTag = " + newTag);
-  // first see if the tag exists
-  db.Tag.upsert({ name: newTag }).then(function(test) {
-    if (test) {
-      //res.status(200);
-      //res.send("Successfully stored");
-      console.log("stored:" + JSON.stringify(test));
-    } else {
-      //res.status(200);
-      //res.send("Successfully inserted");
-      console.log("inserted:" + JSON.stringify(test));
-    }
-  });
-  tagIdArray.push("1");
-  // line above exists only to satify eslint/travis, remove it before debugging
-  // db.Tag.findAll({
-  //   limit: 1,
-  //   where: { name: newTag }
-  // }).then(function(existingTag) {
-  //   if (existingTag) {
-  //     console.log("existingTag:" + JSON.stringify(existingTag));
-  //     tagIdArray.push(existingTag.id);
+function createTag2(newTag, tagIdArray) {
+  console.log("createTag2 newTag = " + newTag);
+
+  // db.Tag.upsert({ name: newTag }, { returning: true }).then(function(dbTag) {
+  //   console.log("this", dbTag);
+  //   if (dbTag) {
+  //     //res.status(200);
+  //     //res.send("Successfully stored");
+  //     console.log("stored:" + JSON.stringify(dbTag));
   //   } else {
-  //     console.log("no tag:" + JSON.stringify(existingTag));
-  //     db.Tag.create({ name: newTag }).then(function(dbTag) {
-  //       console.log("dbTag.id: " + dbTag.id);
-  //       tagIdArray.push(dbTag.id);
-  //     });
+  //     //res.status(200);
+  //     //res.send("Successfully inserted");
+  //     console.log("inserted:" + JSON.stringify(dbTag));
   //   }
   // });
+
+  //tagIdArray.push("1");
+  // line above exists only to satify eslint/travis, remove it before debugging
+  db.Tag.findAll({
+    limit: 1,
+    where: { name: newTag }
+  }).then(function(existingTag) {
+    if (existingTag[0]) {
+      console.log("existingTag:" + JSON.stringify(existingTag));
+      console.log("existingTag.id: " + existingTag[0].id);
+      tagIdArray.push(existingTag[0].id);
+    } else {
+      console.log("no tag");
+      db.Tag.create({ name: newTag }).then(function(createdTag) {
+        //console.log(JSON.stringify(createdTag));
+        console.log("createdTag: " + JSON.stringify(createdTag));
+        tagIdArray.push(createdTag.id);
+      });
+    }
+    console.log(tagIdArray);
+  });
 }
