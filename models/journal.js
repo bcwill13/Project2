@@ -18,7 +18,6 @@ module.exports = function(sequelize, DataTypes) {
       as: "tags",
       foreignKey: "journalId"
     });
-
   };
   return Journal;
 };
