@@ -12,13 +12,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  // Journal.associate = function(models) {
-  //   Journal.belongsToMany(models.Tag, {
-  //     through: "JournalTags",
-  //     as: "tags",
-  //     foreignKey: "journalId"
-  //   });
+  Journal.associate = function(models) {
+    Journal.belongsToMany(models.Tag, {
+      through: "JournalTags",
+      as: "tags",
+      foreignKey: "journalId"
+    });
 
-  // };
+  };
   return Journal;
 };

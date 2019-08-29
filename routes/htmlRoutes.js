@@ -33,7 +33,8 @@ module.exports = function(app) {
       ]
     }).then(function(dbJournal) {
       // If everything goes well respond with the journals
-
+      // var journalsReversed = dbJournal.reverse();
+      console.log(dbJournal);
       res.render("allEntries", {
         journals: dbJournal
       });
