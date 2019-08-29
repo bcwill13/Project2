@@ -1,6 +1,9 @@
 var db = require("../models");
 
 module.exports = function(app) {
+  var favicon = require("serve-favicon");
+  app.use(favicon(__dirname + "/favicon.ico"));
+
   // Load index page
   app.get("/", function(req, res) {
     db.Journal.findAll({}).then(function(dbJournals) {
