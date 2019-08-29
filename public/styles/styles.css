@@ -31,19 +31,16 @@ body.light-mode button {
 
 body.dark-mode #journal {
   text-align: center;
-  font-family: 'Bungee Inline', cursive;
+  font-family: "Bungee Inline", cursive;
 }
 
 body.light-mode #journal {
   text-align: center;
-  font-family: 'Bungee Inline', cursive;
+  font-family: "Bungee Inline", cursive;
 
-  color: #DF7492;
-  text-shadow:
-		-1px -1px 0 #E9EBE6,
-		1px -1px 0 #E9EBE6,
-		-1px 1px 0 #E9EBE6,
-		1px 1px 0 #E9EBE6;;
+  color: #df7492;
+  text-shadow: -1px -1px 0 #e9ebe6, 1px -1px 0 #e9ebe6, -1px 1px 0 #e9ebe6,
+    1px 1px 0 #e9ebe6;
 }
 
 body.dark-mode h2 {
@@ -100,13 +97,13 @@ body.light-mode #submit {
 }
 
 body.dark-mode li {
-  background-color: #5382A0;
-  color: #E9EBE6;
+  background-color: #5382a0;
+  color: #e9ebe6;
 }
 
 body.dark-mode #entries {
   text-align: center;
-  font-family: 'Bungee Inline', cursive;
+  font-family: "Bungee Inline", cursive;
 }
 
 body.dark-mode button {
@@ -115,15 +112,14 @@ body.dark-mode button {
 }
 
 body.light-mode li {
-  background-color: #5382A0;
-  color: #E9EBE6;
+  background-color: #5382a0;
+  color: #e9ebe6;
 }
 
 body.light-mode #entries {
   text-align: center;
-  font-family: 'Bungee Inline', cursive;
+  font-family: "Bungee Inline", cursive;
 }
-
 
 /* body.dark-mode label {
   background-color: lightgray;
@@ -150,9 +146,12 @@ li {
 
 body.dark-mode #dark-light {
   float: right;
-  
 }
 
 body.light-mode #dark-light {
   float: right;
+}
+
+#journal-description {
+  height: 72px;
 }
