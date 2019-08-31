@@ -1,5 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
-  var JournalTag = sequelize.define("JournalTags", {
+  var JournalTag = sequelize.define("JournalTag", {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
     journalId: {
       allowNull: false,
       type: DataTypes.INTEGER,
