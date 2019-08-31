@@ -40,13 +40,6 @@ module.exports = function(app) {
   //   });
   // });
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
   // This uses apix as a temp solution while working out the details of posting a journal and tag
   // app.post("/apix/journals", function(req, res) {
   //   db.Journal.create(req.body).then(function(dbJournal) {

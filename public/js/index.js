@@ -3,6 +3,7 @@ var $journalTitle = $("#journal-title");
 var $journalDescription = $("#journal-description");
 var $submitBtn = $("#submit");
 var $journalList = $("#journal-list");
+var $chipSection = $("#lg-Chips");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -104,6 +105,7 @@ var handleFormSubmit = function(event) {
 
   $journalTitle.val("");
   $journalDescription.val("");
+  $chipSection.empty("");
 };
 
 // handleDeleteBtnClick is called when an journal's delete button is clicked
