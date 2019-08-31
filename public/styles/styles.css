@@ -155,3 +155,7 @@ body.light-mode #dark-light {
 #journal-description {
   height: 72px;
 }
+
+.modal{
+  color: black;
+}
