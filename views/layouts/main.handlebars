@@ -9,7 +9,7 @@
 
 
   <!-- Materialize Icons -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <title>Dream Journal</title>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -21,9 +21,10 @@
 </head>
 
 <body id="body" class="dark-mode">
-  <div class="row">    
+  <div class="row">
     <a class="waves-effect waves-light btn" href="../"><i class="material-icons">add</i>Create New Entry</a>
-    <a class="waves-effect waves-light btn" href="../journals"><i class="material-icons">library_books</i>All Entries</a>
+    <a class="waves-effect waves-light btn" href="../journals"><i class="material-icons">library_books</i>All
+      Entries</a>
     <a class="waves-effect waves-light btn" href="../tags"><i class="material-icons">local_offer</i>Entries by Tag</a>
     <button type="button" id="dark-light" onclick="toggleDarkLight()" title="Toggle dark/light mode">🌛</button>
   </div>
@@ -59,16 +60,24 @@
     console.log(tagList);
   })
 
-$(document).ready(function(){
+  $(document).ready(function () {
     $('.modal').modal();
+    $("#loginModal").modal("open");
   });
 
-
+  // deletes chips before submission
   $(document).on("click", ".close", function () {
     var thisTag = $(this)[0].parentElement.firstChild.data;
     tagList = tagList.filter((tagObj) => tagObj !== thisTag);
     console.log(tagList);
   });
+
+  //Create account redirect from login modal
+  $("#loginModal").on("click", "#createLink", function () {
+    $("#createAccountModal").modal("open");
+  })
+
+
 
 </script>
 

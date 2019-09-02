@@ -39,8 +39,7 @@ body.light-mode #journal {
   font-family: "Bungee Inline", cursive;
 
   color: #df7492;
-  text-shadow: -1px -1px 0 #e9ebe6, 1px -1px 0 #e9ebe6, -1px 1px 0 #e9ebe6,
-    1px 1px 0 #e9ebe6;
+  text-shadow: -1px -1px 0 #e9ebe6, 1px -1px 0 #e9ebe6, -1px 1px 0 #e9ebe6, 1px 1px 0 #e9ebe6;
 }
 
 body.dark-mode h2 {
@@ -156,6 +155,10 @@ body.light-mode #dark-light {
   height: 72px;
 }
 
-.modal{
+.modal {
   color: black;
+}
+
+form {
+  margin-left: 1rem;
 }

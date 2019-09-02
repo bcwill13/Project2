@@ -33,54 +33,77 @@ module.exports = function(app) {
   // use the strategy
   passport.use(strategy);
   app.use(passport.initialize());
-  // app.post("/api/journals", function(req, res) {
-  //   db.Journal.create({
-  //     title: req.body.title,
-  //     description: req.body.description
-  //   });
-  //   // CREATE TAGS OUTSIDE OF JOURNAL.CREATE.THEN
-  //   // req.body.tags.forEach(function(newTag){
-  //   //   db.Tag.create
-  //   // })
-  //   console.log(res);
-  // });
   app.post("/api/journals", function(req, res) {
-    console.log(
-      "app.post using req.body of: '" + JSON.stringify(req.body) + "'"
-    );
-    db.Journal.create(req.body).then(function(dbJournal) {
-      console.log(req.body.tags);
-      // Loop through all tagIDs creating the linking table entries
-      req.body.tags.forEach(function(newTag) {
-        db.Tag.findAll({
-          limit: 1,
-          where: { name: newTag }
-        }).then(function(existingTag) {
-          if (existingTag[0]) {
+    db.Journal.create({
+      title: req.body.title,
+      description: req.body.description
+    });
+    req.body.tags.forEach(function(newTag) {
+      db.Tag.findAll({
+        limit: 1,
+        where: { name: newTag }
+      }).then(function(existingTag) {
+        if (existingTag[0]) {
+          db.JournalTag.create({
+            journalId: dbJournal.id,
+            tagId: existingTag[0].id
+          }).then(function(dbTagId) {
+            console.log(dbTagId);
+          });
+        } else {
+          console.log("no tag");
+          db.Tag.create({ name: newTag }).then(function(createdTag) {
+            console.log(createdTag.id);
+            console.log("createdTag: " + JSON.stringify(createdTag));
             db.JournalTag.create({
               journalId: dbJournal.id,
-              tagId: existingTag[0].id
+              tagId: createdTag.id
             }).then(function(dbTagId) {
               console.log(dbTagId);
             });
-          } else {
-            console.log("no tag");
-            db.Tag.create({ name: newTag }).then(function(createdTag) {
-              console.log(createdTag.id);
-              console.log("createdTag: " + JSON.stringify(createdTag));
-              db.JournalTag.create({
-                journalId: dbJournal.id,
-                tagId: createdTag.id
-              }).then(function(dbTagId) {
-                console.log(dbTagId);
-              });
-            });
-          }
-        });
+          });
+        }
       });
-      res.json(dbJournal);
     });
+    res.json(dbJournal);
   });
+  // app.post("/api/journals", function(req, res) {
+  //   console.log(
+  //     "app.post using req.body of: '" + JSON.stringify(req.body) + "'"
+  //   );
+  //   db.Journal.create(req.body).then(function(dbJournal) {
+  //     console.log(req.body.tags);
+  //     // Loop through all tagIDs creating the linking table entries
+  //     req.body.tags.forEach(function(newTag) {
+  //       db.Tag.findAll({
+  //         limit: 1,
+  //         where: { name: newTag }
+  //       }).then(function(existingTag) {
+  //         if (existingTag[0]) {
+  //           db.JournalTag.create({
+  //             journalId: dbJournal.id,
+  //             tagId: existingTag[0].id
+  //           }).then(function(dbTagId) {
+  //             console.log(dbTagId);
+  //           });
+  //         } else {
+  //           console.log("no tag");
+  //           db.Tag.create({ name: newTag }).then(function(createdTag) {
+  //             console.log(createdTag.id);
+  //             console.log("createdTag: " + JSON.stringify(createdTag));
+  //             db.JournalTag.create({
+  //               journalId: dbJournal.id,
+  //               tagId: createdTag.id
+  //             }).then(function(dbTagId) {
+  //               console.log(dbTagId);
+  //             });
+  //           });
+  //         }
+  //       });
+  //     });
+  //     res.json(dbJournal);
+  //   });
+  // });
 
   /**
    *  APIs for journals
