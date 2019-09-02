@@ -1,5 +1,8 @@
-module.exports = function(sequelize, DataTypes) {
-  var JournalTag = sequelize.define("JournalTags", {
+module.exports = function(
+  sequelize
+  //, DataTypes
+) {
+  var JournalTag = sequelize.define("JournalTag", {
     // journalId: {
     //   allowNull: false,
     //   type: DataTypes.INTEGER,
