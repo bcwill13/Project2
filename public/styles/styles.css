@@ -2,7 +2,7 @@ body.dark-mode {
   background-image: url("https://steamuserimages-a.akamaihd.net/ugc/270598716228094303/D09D43F7AF5CE184E5A79C3A8F706B2A3BB64E2F/");
   color: #eee;
   background-position: center;
-  background-size: 106%;
+  background-size: cover;
   color: white;
 }
 body.dark-mode a {
@@ -16,7 +16,7 @@ body.light-mode {
   background-image: url("https://steamuserimages-a.akamaihd.net/ugc/100603690261137263/38837F55ADABD92873219D525D45F3D474B9F789/");
   color: #111;
   background-position: center;
-  background-size: 106%;
+  background-size: cover;
 }
 body.light-mode a {
   color: #111;
@@ -39,8 +39,7 @@ body.light-mode #journal {
   font-family: "Bungee Inline", cursive;
 
   color: #df7492;
-  text-shadow: -1px -1px 0 #e9ebe6, 1px -1px 0 #e9ebe6, -1px 1px 0 #e9ebe6,
-    1px 1px 0 #e9ebe6;
+  text-shadow: -1px -1px 0 #e9ebe6, 1px -1px 0 #e9ebe6, -1px 1px 0 #e9ebe6, 1px 1px 0 #e9ebe6;
 }
 
 body.dark-mode h2 {
@@ -154,4 +153,12 @@ body.light-mode #dark-light {
 
 #journal-description {
   height: 72px;
+}
+
+.modal {
+  color: black;
+}
+
+form {
+  margin-left: 1rem;
 }

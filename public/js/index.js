@@ -3,6 +3,7 @@ var $journalTitle = $("#journal-title");
 var $journalDescription = $("#journal-description");
 var $submitBtn = $("#submit");
 var $journalList = $("#journal-list");
+var $chipSection = $("#lg-Chips");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -12,7 +13,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "apix/journals",
+      url: "api/journals",
       data: JSON.stringify(journal)
     });
   },
@@ -78,21 +79,7 @@ var handleFormSubmit = function(event) {
     description: $journalDescription.val().trim(),
     tags: tagList
   };
-  // // above is real, below makes debugging easier
-  // var journal = {
-  //   // debugging/temp
-  //   title: "journalTitle",
-  //   description: "journalDescription",
-  //   tags: ["Hey", "I am", "newTag8"]
-  // };
 
-  // validity checks
-  // *** V1 - check that both desc and title are filled in
-  // if (!(journal.title && journal.description)) {
-  //   alert("You must enter an journal title and description!");
-  //   return;
-  // }
-  // *** V2 - check only that desc is filled in
   if (!journal.description) {
     alert("You must enter a dream description");
     return;
@@ -104,6 +91,7 @@ var handleFormSubmit = function(event) {
 
   $journalTitle.val("");
   $journalDescription.val("");
+  $chipSection.empty("");
 };
 
 // handleDeleteBtnClick is called when an journal's delete button is clicked
@@ -120,4 +108,4 @@ var handleDeleteBtnClick = function() {
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$journalList.on("click", ".delete", handleDeleteBtnClick);
+$("li").on("click", ".delete-entry", handleDeleteBtnClick);

@@ -35,11 +35,79 @@
         </div>
       </div>
       <div class="row">
-        <button class="btn waves-effect waves-light" id="submit" type="submit" name="action">Submit
+        <button class="btn waves-effect waves-light modal-trigger" id="submit" type="submit" name="action"
+          href="#modal1">Submit
           <i class="material-icons right">send</i>
         </button>
       </div>
     </form>
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Your dream entry was submitted!</h4>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn">OK</a>
+      </div>
+    </div>
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <div class="col s8">
+            <h4>LOGIN</h4>
+          </div>
+          <div class="col s4">
+            <p> Don't have an account yet?</p>
+          </div>
+        </div>
+        <div class="row">
+          <button id="createLink" class="modal-close waves-effect waves-green btn" style="float:right">Create
+            Account</button>
+        </div>
+      </div>
+      <div id="loginForm">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input placeholder="Username" id="username" type="text" class="validate">
+              <label for="username">Username</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="password" type="text" class="validate">
+              <label for="password">Password</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn" id="loginBtn">LOGIN</a>
+      </div>
+    </div>
+    <div id="createAccountModal" class="modal">
+      <div class="modal-content">
+        <h4>Create an Account</h4>
+      </div>
+      <div id="createForm">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input placeholder="Username" id="username" type="text" class="validate">
+              <label for="username">Username</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="password" type="text" class="validate">
+              <label for="password">Password</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn" id="createAccount">CREATE</a>
+      </div>
+    </div>
   </div>
 </div>
 
