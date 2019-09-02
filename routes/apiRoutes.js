@@ -41,12 +41,16 @@ module.exports = function(app) {
     db.Journal.create(req.body).then(function(dbJournal) {
       console.log(req.body.tags);
       // Loop through all tagIDs creating the linking table entries
-      req.body.tags.forEach(function(newTag) {
+      req.body.tags.forEach(function(newTag, index) {
+        console.log("createTag1 at index:" + index + " = " + newTag);
+        console.log("createTag2 newTag = " + newTag);
         db.Tag.findAll({
           limit: 1,
           where: { name: newTag }
         }).then(function(existingTag) {
           if (existingTag[0]) {
+            console.log("existingTag:" + JSON.stringify(existingTag));
+            console.log("existingTag.id: " + existingTag[0].id);
             db.JournalTag.create({
               journalId: dbJournal.id,
               tagId: existingTag[0].id
@@ -96,11 +100,11 @@ module.exports = function(app) {
   });
 
   // Create a new example
-  app.post("/api/journals", function(req, res) {
-    db.Journal.create(req.body).then(function(journal) {
-      res.json(journal);
-    });
-  });
+  // app.post("/api/journals", function(req, res) {
+  //   db.Journal.create(req.body).then(function(journal) {
+  //     res.json(journal);
+  //   });
+  // });
 
   // Delete an example by id
   app.delete("/api/journals/:journalId", function(req, res) {

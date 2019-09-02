@@ -20,8 +20,13 @@ module.exports = function(sequelize, DataTypes) {
       foreignKey: "journalId"
     });
   };
-  Journal.associate = function(models) {
-    Journal.belongsTo(models.User);
-  };
+  // LINKS JOURNALS TO A USER. ONLY IMPLEMENT AFTER POSTING WORKS
+  // Journal.associate = function(models) {
+  //   Journal.belongsTo(models.User, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
   return Journal;
 };
