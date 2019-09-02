@@ -43,7 +43,6 @@ module.exports = function(app) {
       // Loop through all tagIDs creating the linking table entries
       req.body.tags.forEach(function(newTag, index) {
         console.log("createTag1 at index:" + index + " = " + newTag);
-        console.log("createTag2 newTag = " + newTag);
         db.Tag.findAll({
           limit: 1,
           where: { name: newTag }
@@ -58,7 +57,7 @@ module.exports = function(app) {
               console.log(dbTagId);
             });
           } else {
-            console.log("no tag");
+            console.log("new tag");
             db.Tag.create({ name: newTag }).then(function(createdTag) {
               console.log(createdTag.id);
               console.log("createdTag: " + JSON.stringify(createdTag));

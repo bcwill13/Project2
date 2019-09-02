@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Journal = sequelize.define("Journal", {
     title: {
-      allowNull: true,
+      allowNull: false,
       type: DataTypes.TEXT,
       defaultValue: "No Title"
     },
