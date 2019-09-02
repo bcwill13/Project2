@@ -33,7 +33,17 @@ module.exports = function(app) {
   // use the strategy
   passport.use(strategy);
   app.use(passport.initialize());
-
+  // app.post("/api/journals", function(req, res) {
+  //   db.Journal.create({
+  //     title: req.body.title,
+  //     description: req.body.description
+  //   });
+  //   // CREATE TAGS OUTSIDE OF JOURNAL.CREATE.THEN
+  //   // req.body.tags.forEach(function(newTag){
+  //   //   db.Tag.create
+  //   // })
+  //   console.log(res);
+  // });
   app.post("/api/journals", function(req, res) {
     console.log(
       "app.post using req.body of: '" + JSON.stringify(req.body) + "'"

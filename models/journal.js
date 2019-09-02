@@ -19,5 +19,12 @@ module.exports = function(sequelize, DataTypes) {
       foreignKey: "journalId"
     });
   };
+  Journal.associate = function(models) {
+    Journal.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
   return Journal;
 };
