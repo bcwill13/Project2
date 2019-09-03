@@ -100,7 +100,6 @@ var handleDeleteBtnClick = function() {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
-
   API.deleteJournal(idToDelete).then(function() {
     refreshJournals();
   });
@@ -108,4 +107,4 @@ var handleDeleteBtnClick = function() {
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$("li").on("click", ".delete-entry", handleDeleteBtnClick);
+$(document).on("click", ".delete-entry", handleDeleteBtnClick);
