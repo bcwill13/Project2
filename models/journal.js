@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+
   Journal.associate = function(models) {
     Journal.belongsToMany(models.Tag, {
       through: "JournalTags",
