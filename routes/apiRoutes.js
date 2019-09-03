@@ -50,23 +50,33 @@ module.exports = function(app) {
           if (existingTag[0]) {
             console.log("existingTag:" + JSON.stringify(existingTag));
             console.log("existingTag.id: " + existingTag[0].id);
-            db.JournalTag.create({
-              journalId: dbJournal.id,
-              tagId: existingTag[0].id
-            }).then(function(dbTagId) {
-              console.log(dbTagId);
-            });
+            db.sequelize
+              .query(
+                "INSERT INTO journaltags (journalId, tagId) VALUES (?, ?)",
+                {
+                  replacements: [dbJournal.id, existingTag[0].id],
+                  type: db.Sequelize.QueryTypes.INSERT
+                }
+              )
+              .then(function(dbTagId) {
+                console.log(dbTagId);
+              });
           } else {
             console.log("new tag");
             db.Tag.create({ name: newTag }).then(function(createdTag) {
               console.log(createdTag.id);
               console.log("createdTag: " + JSON.stringify(createdTag));
-              db.JournalTag.create({
-                journalId: dbJournal.id,
-                tagId: createdTag.id
-              }).then(function(dbTagId) {
-                console.log(dbTagId);
-              });
+              db.sequelize
+                .query(
+                  "INSERT INTO journaltags (journalId, tagId) VALUES (?, ?)",
+                  {
+                    replacements: [dbJournal.id, createdTag.id],
+                    type: db.Sequelize.QueryTypes.INSERT
+                  }
+                )
+                .then(function(dbTagId) {
+                  console.log(dbTagId);
+                });
             });
           }
         });
