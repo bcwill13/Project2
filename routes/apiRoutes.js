@@ -34,118 +34,7 @@ module.exports = function(app) {
   passport.use(strategy);
   app.use(passport.initialize());
 
-  // app.get("/api/journals", function(req, res) {
-  //   db.Journal.findAll({}).then(function(dbJournals) {
-  //     res.json(dbJournals);
-  //   });
-  // });
-
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-  // This uses apix as a temp solution while working out the details of posting a journal and tag
-  // app.post("/apix/journals", function(req, res) {
-  //   db.Journal.create(req.body).then(function(dbJournal) {
-  //     res.json(dbJournal);
-  //   });
-  // });
-
-  // example of how a many to many post is made for BOTH tables
-  // as seen here: https://medium.com/@tonyangelo9707/many-to-many-associations-using-sequelize-941f0b6ac102
-  // (scroll about half way down)
-  // app.post('/apix/journals', asyncHandler(async (req, res) => {
-  //   // Create and save the order
-  //   const savedJournal = await Journal.create(req.body, {w: 1}, { returning: true });
-
-  //   // Loop through all the items in req.products
-  //   req.body.tags.forEach((item) => {
-
-  //     // Search for the tag with the givenId and make sure it exists. If it doesn't, respond with status 400.
-  //     const tag = await Tag.findById(item.id);
-  //     if (!tag) {
-  //       return res.status(400);
-  //     }
-
-  //     // Create a dictionary with which to create the journaltag
-  //     const jt = {
-  //       journalId: savedJournal.id,
-  //       tagId: item.id
-  //     }
-
-  //     // Create and save a journalTag
-  //     const savedJournalTag = await JournalTag.create(jt, { w: 1 }, { returning: true });
-  //   });
-
-  //   // If everything goes well, respond with the journal
-  //   return res.status(200).json(savedJournal)
-  // }));
-
-  // app.post("/apix/journals", function(req, res) {
-  //   console.log(
-  //     "app.post using req.body of: '" + JSON.stringify(req.body) + "'"
-  //   );
-  //   // const createdJournal = await db.Journal.create(req.body);
-  //   // createdJournal.addTags(req.body.tags);
-  //   //Create and save the order
-  //   db.Journal.create(req.body).then(function(dbJournal) {
-  //     //console.log(dbJournal);
-  //     //dbJournal.addTags(req.body.tags);
-  //     console.log(req.body.tags);
-  //     var tagIdArray = [];
-  //     // // Loop through all tags
-  //     createAllTags(function() {
-  //       tagIdArray = [1, 2, 3]; // obvious BS
-  //       console.log(
-  //         "tagIdArray [" +
-  //           tagIdArray +
-  //           "] - fudged values to test JournalTag.create"
-  //       );
-  //       // Loop through all tagIDs creating the linking table entries
-  //       if (tagIdArray.length > 0) {
-  //         tagIdArray.forEach(createJournalTag);
-  //         function createJournalTag(tagIdArrayItem) {
-  //           console.log(
-  //             "tagIdArrayItem: " +
-  //               tagIdArrayItem +
-  //               " dbJournal.id: " +
-  //               dbJournal.id
-  //           );
-  //           db.JournalTag.create({
-  //             journalId: dbJournal.id,
-  //             tagId: tagIdArrayItem
-  //           }).then(function(dbTagId) {
-  //             console.log(dbTagId);
-  //           });
-  //         }
-  //       } else {
-  //         console.log("unable to create linking journaltag records.");
-  //       }
-  //     });
-  //     function createAllTags(cb) {
-  //       req.body.tags.forEach(createTag1);
-  //       function createTag1(newTag, index) {
-  //         console.log("createTag1 at index:" + index + " = " + newTag);
-  //         createTag2(newTag, tagIdArray, function() {
-  //           console.log("one loop done:" + JSON.stringify(idArray));
-  //         });
-  //       }
-  //       cb();
-  //     }
-  //     console.log(
-  //       "***completed first loop and calls to createTag3 tagIdArray:" +
-  //         JSON.stringify(tagIdArray)
-  //     );
-  //     console.log("here");
-
-  //     res.json(dbJournal);
-  //   });
-  // });
-
-  app.post("/apix/journals", function(req, res) {
+  app.post("/api/journals", function(req, res) {
     console.log(
       "app.post using req.body of: '" + JSON.stringify(req.body) + "'"
     );
@@ -154,7 +43,6 @@ module.exports = function(app) {
       // Loop through all tagIDs creating the linking table entries
       req.body.tags.forEach(function(newTag, index) {
         console.log("createTag1 at index:" + index + " = " + newTag);
-        console.log("createTag2 newTag = " + newTag);
         db.Tag.findAll({
           limit: 1,
           where: { name: newTag }
@@ -162,23 +50,33 @@ module.exports = function(app) {
           if (existingTag[0]) {
             console.log("existingTag:" + JSON.stringify(existingTag));
             console.log("existingTag.id: " + existingTag[0].id);
-            db.JournalTag.create({
-              journalId: dbJournal.id,
-              tagId: existingTag[0].id
-            }).then(function(dbTagId) {
-              console.log(dbTagId);
-            });
+            db.sequelize
+              .query(
+                "INSERT INTO journaltags (journalId, tagId) VALUES (?, ?)",
+                {
+                  replacements: [dbJournal.id, existingTag[0].id],
+                  type: db.Sequelize.QueryTypes.INSERT
+                }
+              )
+              .then(function(dbTagId) {
+                console.log(dbTagId);
+              });
           } else {
-            console.log("no tag");
+            console.log("new tag");
             db.Tag.create({ name: newTag }).then(function(createdTag) {
               console.log(createdTag.id);
               console.log("createdTag: " + JSON.stringify(createdTag));
-              db.JournalTag.create({
-                journalId: dbJournal.id,
-                tagId: createdTag.id
-              }).then(function(dbTagId) {
-                console.log(dbTagId);
-              });
+              db.sequelize
+                .query(
+                  "INSERT INTO journaltags (journalId, tagId) VALUES (?, ?)",
+                  {
+                    replacements: [dbJournal.id, createdTag.id],
+                    type: db.Sequelize.QueryTypes.INSERT
+                  }
+                )
+                .then(function(dbTagId) {
+                  console.log(dbTagId);
+                });
             });
           }
         });
@@ -211,11 +109,11 @@ module.exports = function(app) {
   });
 
   // Create a new example
-  app.post("/api/journals", function(req, res) {
-    db.Journal.create(req.body).then(function(journal) {
-      res.json(journal);
-    });
-  });
+  // app.post("/api/journals", function(req, res) {
+  //   db.Journal.create(req.body).then(function(journal) {
+  //     res.json(journal);
+  //   });
+  // });
 
   // Delete an example by id
   app.delete("/api/journals/:journalId", function(req, res) {
@@ -360,41 +258,3 @@ module.exports = function(app) {
     }
   );
 };
-
-// function createTag2(newTag, tagIdArray) {
-//   console.log("createTag2 newTag = " + newTag);
-
-//   // db.Tag.upsert({ name: newTag }, { returning: true }).then(function(dbTag) {
-//   //   console.log("this", dbTag);
-//   //   if (dbTag) {
-//   //     //res.status(200);
-//   //     //res.send("Successfully stored");
-//   //     console.log("stored:" + JSON.stringify(dbTag));
-//   //   } else {
-//   //     //res.status(200);
-//   //     //res.send("Successfully inserted");
-//   //     console.log("inserted:" + JSON.stringify(dbTag));
-//   //   }
-//   // });
-
-//   //tagIdArray.push("1");
-//   // line above exists only to satify eslint/travis, remove it before debugging
-//   db.Tag.findAll({
-//     limit: 1,
-//     where: { name: newTag }
-//   }).then(function(existingTag) {
-//     if (existingTag[0]) {
-//       console.log("existingTag:" + JSON.stringify(existingTag));
-//       console.log("existingTag.id: " + existingTag[0].id);
-//       tagIdArray.push(existingTag[0].id);
-//     } else {
-//       console.log("no tag");
-//       db.Tag.create({ name: newTag }).then(function(createdTag) {
-//         //console.log(JSON.stringify(createdTag));
-//         console.log("createdTag: " + JSON.stringify(createdTag));
-//         tagIdArray.push(createdTag.id);
-//       });
-//     }
-//     console.log(tagIdArray);
-//   });
-// }

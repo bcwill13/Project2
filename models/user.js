@@ -7,6 +7,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     }
   });
-
+  // ASSOCIATES USER WITH JOURNAL ENTRIES. ONLY IMPLEMENT AFTER POSTING WORKS
+  // User.associate = function(models) {
+  //   User.hasMany(models.Journal, {
+  //     onDelete: "cascade"
+  //   });
+  // };
   return User;
 };
