@@ -5,5 +5,8 @@
     "database": "dreamjournal_db",
     "host": "localhost",
     "dialect": "mysql"
+  },
+  "production": {
+    "use_env_variable": "JAWSDB_URL"
   }
 }
